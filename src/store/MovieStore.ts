@@ -1,66 +1,61 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
+import type { Movies, MoviesApiResponse } from '../api/types/movie';
+import axios, { type AxiosResponse } from 'axios';
+import { toJS } from 'mobx';
 
-interface User {
-  id: string;
-  username: string;
-  email: string;
-  password: string;
-}
-
-class UserStore {
-  currentUser: User | null = null;
-  users: User[] = [];
+class MoviesStore {
+  movies: Movies = [];
+  page = 1;
+  isLoading = false;
+  moreToLoad = true;
 
   constructor() {
     makeAutoObservable(this);
-    this.loadFromLocalStorage();
   }
 
-  loadFromLocalStorage() {
-    const savedUsers = localStorage.getItem('users');
-    if (savedUsers) this.users = JSON.parse(savedUsers);
+  async loadMovies(params = {}) {
+    if (this.isLoading || !this.moreToLoad) return;
 
-    const savedUser = localStorage.getItem('currentUser');
-    if (savedUser) this.currentUser = JSON.parse(savedUser);
-  }
+    this.isLoading = true;
 
-  register(username: string, email: string, password: string) {
-    const newUser = {
-      id: Date.now().toString(),
-      username,
-      email,
-      password,
-    };
+    try {
+      const response: AxiosResponse<MoviesApiResponse> = await axios.get(
+        'https://api.kinopoisk.dev/v1.4/movie',
+        {
+          params: {
+            limit: 50,
+            page: this.page,
+            ...params,
+          },
+          headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
+        }
+      );
 
-    this.users.push(newUser);
-    this.currentUser = newUser;
-
-    this.saveToLocalStorage();
-  }
-
-  login(email: string, password: string) {
-    const user = this.users.find(
-      (user) => user.email === email && user.password === password
-    );
-    if (user) {
-      this.currentUser = user;
-      this.saveToLocalStorage();
-      return true;
+      const { docs, page, pages } = response.data;
+      console.log('docs: ', docs, 'page:', page, 'pages:', pages);
+      runInAction(() => {
+        this.movies = [...this.movies, ...docs];
+        this.page += 1;
+        this.moreToLoad = page < pages;
+      });
+    } finally {
+      runInAction(() => {
+        this.isLoading = false;
+        console.log(`InStore`, toJS(this.movies.length));
+      });
     }
-    return false;
   }
 
-  logout() {
-    this.currentUser = null;
-    localStorage.removeItem('currentUser');
+  reset() {
+    this.movies = [];
+    this.page = 1;
+    this.moreToLoad = true;
   }
-
-  private saveToLocalStorage() {
-    localStorage.setItem('users', JSON.stringify(this.users));
-    if (this.currentUser) {
-      localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+  cleanup() {
+    if (this.movies.length > 100) {
+      this.movies = this.movies.slice(-100);
     }
   }
 }
 
-export default new UserStore();
+export default new MoviesStore();

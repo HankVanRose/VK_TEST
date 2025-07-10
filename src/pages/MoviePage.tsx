@@ -1,7 +1,9 @@
-import React from 'react'
+import React from 'react';
+import { useParams } from 'react-router';
+import MovieStore from '../store/MovieStore';
 
 export default function MoviePage() {
-  return (
-    <div>MoviePage</div>
-  )
+  const { id } = useParams();
+
+  return <div>MoviePage</div>;
 }

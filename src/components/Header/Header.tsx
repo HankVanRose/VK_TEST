@@ -29,7 +29,9 @@ const Header = observer(() => {
               <Avatar sx={{ bgcolor: 'secondary.main' }}>
                 {UserStore.currentUser.username.charAt(0).toUpperCase()}
               </Avatar>
-              <Typography>{UserStore.currentUser.username}</Typography>
+              <Typography>
+                {UserStore.currentUser.username.toUpperCase()}
+              </Typography>
               <Button color="inherit" onClick={() => UserStore.logout()}>
                 Выйти
               </Button>

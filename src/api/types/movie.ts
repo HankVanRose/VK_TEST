@@ -47,3 +47,12 @@ export interface Poster {
   previewUrl: string;
   url: string;
 }
+
+
+export interface MoviesApiResponse {
+  docs: Movie[];
+  total: number;
+  limit: number;
+  page: number;
+  pages: number;
+}
