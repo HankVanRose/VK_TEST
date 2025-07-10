@@ -3,6 +3,8 @@ import HomePage from './pages/HomePage';
 import './styles/App.css';
 import MoviePage from './pages/MoviePage';
 import Layout from './pages/Layout';
+import Registration from './pages/Registration';
+import Login from './pages/LogIn';
 
 function App() {
   return (
@@ -11,6 +13,8 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/movie/:id" element={<MoviePage />} />
+           <Route path="/register" element={<Registration />} />
+           <Route path="/login" element={<Login />} />
         </Route>
       </Routes>
     </>

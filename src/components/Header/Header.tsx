@@ -4,20 +4,49 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { Link } from 'react-router';
-import styles from './Header.module.css';
- 
 
-export default function Header() {
+import { observer } from 'mobx-react-lite';
+
+import { Avatar } from '@mui/material';
+import UserStore from '../../store/UserStore';
+
+const Header = observer(() => {
   return (
-    <Box className={styles.wrapper}>
-      <AppBar position="static" className={styles.header}>
+    <Box>
+      <AppBar position="static">
         <Toolbar>
-          <Typography variant="h6" component={Link} sx={{ flexGrow: 1 }} to="/">
+          <Typography
+            variant="h6"
+            component={Link}
+            to="/"
+            sx={{ flexGrow: 1, textDecoration: 'none', color: 'inherit' }}
+          >
             HVRmdb
           </Typography>
-          <Button color="inherit">Login</Button>
+
+          {UserStore.currentUser ? (
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Avatar sx={{ bgcolor: 'secondary.main' }}>
+                {UserStore.currentUser.username.charAt(0).toUpperCase()}
+              </Avatar>
+              <Typography>{UserStore.currentUser.username}</Typography>
+              <Button color="inherit" onClick={() => UserStore.logout()}>
+                Выйти
+              </Button>
+            </Box>
+          ) : (
+            <Box>
+              <Button color="inherit" component={Link} to="/login">
+                Войти
+              </Button>
+              <Button color="inherit" component={Link} to="/register">
+                Регистрация
+              </Button>
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
     </Box>
   );
-}
+});
+export default Header;

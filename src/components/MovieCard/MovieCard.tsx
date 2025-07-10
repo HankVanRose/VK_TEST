@@ -19,7 +19,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
 
   return (
     <Card
-      onClick={()=>navigate(`/movie/${movie.id}`)}
+      onClick={() => navigate(`/movie/${movie.id}`)}
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -43,7 +43,6 @@ export default function MovieCard({ movie }: MovieCardProps) {
         sx={{
           height: 420,
           width: '100%',
-
           objectFit: 'cover',
           backgroundImage: movie?.poster?.previewUrl
             ? `url(${movie.poster.previewUrl})`
@@ -104,7 +103,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <FaImdb size={30} style={{ color: '#f5c518', stroke: 'black' }} />
+            <FaImdb size={30} style={{ color: '#f5c518' }} />
             <Typography variant="body1" sx={{ fontSize: '20px' }}>
               {rates.imdb}
             </Typography>
