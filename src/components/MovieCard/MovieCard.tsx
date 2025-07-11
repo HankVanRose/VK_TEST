@@ -3,7 +3,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { TbBinocularsFilled } from 'react-icons/tb';
-import type { Movie } from '../../api/types/movie';
+import type { Movie } from '../../api/types/movies';
 import { Box } from '@mui/material';
 import { FaImdb } from 'react-icons/fa';
 import { SiKinopoisk } from 'react-icons/si';
@@ -16,6 +16,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
   const { kp, imdb } = movie.rating;
   const rates = { kp, imdb };
   const navigate = useNavigate();
+  
 
   return (
     <Card

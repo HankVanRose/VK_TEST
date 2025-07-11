@@ -1,14 +1,18 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import type { Movie, Movies, MoviesApiResponse } from '../api/types/movie';
+import type { Movie, Movies, MoviesApiResponse } from '../api/types/movies';
 import axios, { type AxiosResponse } from 'axios';
 import { toJS } from 'mobx';
+import type {
+  ICurrentMovie,
+  ICurrentMovieApiResponse,
+} from '../api/types/currentMovie';
 
 class MoviesStore {
   movies: Movies = [];
   page = 1;
   isLoading = false;
   moreToLoad = true;
-  currentMovie: Movie | null = null;
+  currentMovie: ICurrentMovie | null = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -20,32 +24,32 @@ class MoviesStore {
     this.isLoading = true;
 
     try {
-      const response: AxiosResponse<MoviesApiResponse> = await axios.get(
-        'https://api.kinopoisk.dev/v1.4/movie',
+      // const response: AxiosResponse<MoviesApiResponse> = await axios.get(
+      //   'https://api.kinopoisk.dev/v1.4/movie',
 
-        {
-          params: {
-            limit: 50,
-            page: this.page,
-            ...params,
-          },
-          headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
-        }
-      );
+      //   {
+      //     params: {
+      //       limit: 50,
+      //       page: this.page,
+      //       ...params,
+      //     },
+      //     headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
+      //   }
+      // );
 
-      // const response = await axios.get<MoviesApiResponse>('../.././data.json');
-      // const allMovies = response.data.docs;
+      const response = await axios.get<MoviesApiResponse>('../.././data.json');
+      const allMovies = response.data.docs;
 
-      // // Эмулируем пагинацию на клиенте
-      // const start = (this.page - 1) * 5;
-      // const end = start + 5;
-      // const docs = allMovies.slice(start, end);
-      const { docs, page, pages } = response.data;
+      // Эмулируем пагинацию на клиенте
+      const start = (this.page - 1) * 5;
+      const end = start + 5;
+      const docs = allMovies.slice(start, end);
+      // const { docs, page, pages } = response.data;
 
       runInAction(() => {
         this.movies = [...this.movies, ...docs];
         this.page += 1;
-        this.moreToLoad = page < pages;
+        this.moreToLoad = start < allMovies.length;
       });
     } finally {
       runInAction(() => {
@@ -60,15 +64,15 @@ class MoviesStore {
       runInAction(() => {
         this.currentMovie = null;
       });
-      const response = await axios.get<MoviesApiResponse>(
-        `https://api.kinopoisk.dev/v1.4/movie/${id}`,
+      const response = await axios.get<ICurrentMovieApiResponse>(
+        `../.././secondFilm.json`,
         {
-          headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
+          // headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
         }
       );
-      // const foundMovie = response.data.docs.find((el) => el.id === id);
+      const foundMovie = response.data.docs.find((el) => el.id === id);
       runInAction(() => {
-        this.currentMovie = response.data;
+        this.currentMovie = foundMovie || null;
         console.log(toJS(this.currentMovie));
       });
     } catch (error) {

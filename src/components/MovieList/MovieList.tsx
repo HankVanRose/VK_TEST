@@ -1,6 +1,6 @@
 import MovieCard from '../MovieCard/MovieCard';
 
-import type { Movies } from '../../api/types/movie';
+import type { Movies } from '../../api/types/movies';
 import { Box } from '@mui/material';
 
 interface MovieListProps {

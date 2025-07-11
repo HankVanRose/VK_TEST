@@ -72,8 +72,12 @@ export default function MoviePage() {
       >
         <Box flex={1} sx={{ maxWidth: { md: 400 } }}>
           <img
-            src={movie?.poster?.url}
-            alt={movie?.poster?.previewUrl}
+            src={movie?.poster?.url || movie?.poster?.previewUrl}
+            alt={
+              movie?.name
+                ? `Тут должен быть постер фильма ${movie.name}  `
+                : 'Постер фильма'
+            }
             style={{
               width: '100%',
               borderRadius: 8,
@@ -146,14 +150,11 @@ export default function MoviePage() {
               }}
             >
               <Typography variant="subtitle2" color="text.secondary">
-                Бюджет
+                Сборы
               </Typography>
+
               <Typography variant="subtitle2">
-                {movie.budget?.value
-                  ? `$${movie.budget.value.toLocaleString()} ${
-                      movie.budget.currency
-                    }`
-                  : 'Неизвестно'}
+                {movie?.fees?.world.value} {movie?.fees?.world.currency}
               </Typography>
             </Grid>
             <Grid
