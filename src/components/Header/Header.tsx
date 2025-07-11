@@ -26,6 +26,13 @@ const Header = observer(() => {
 
           {UserStore.currentUser ? (
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+              <Typography
+                component={Link}
+                to={'/favorites'}
+                sx={{ flexGrow: 1, textDecoration: 'none', color: 'inherit' }}
+              >
+                ИЗБРАННОЕ
+              </Typography>
               <Avatar sx={{ bgcolor: 'secondary.main' }}>
                 {UserStore.currentUser.username.charAt(0).toUpperCase()}
               </Avatar>

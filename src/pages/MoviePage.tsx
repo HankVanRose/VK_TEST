@@ -1,14 +1,19 @@
 import React, { useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import MoviesStore from '../store/MoviesStore.ts';
 import {
+  Avatar,
   Box,
   Button,
+  CardMedia,
   Chip,
-  CircularProgress,
   Divider,
   Grid,
-  ImageList,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemButton,
+  ListItemText,
   Rating,
   Stack,
   Typography,
@@ -17,6 +22,9 @@ import Loading from './Loading.tsx';
 import { toJS } from 'mobx';
 import { SiKinopoisk } from 'react-icons/si';
 import { FaImdb } from 'react-icons/fa';
+import { TbBinocularsFilled } from 'react-icons/tb';
+import LoremGenerator from '../components/Lorem/LoremGenerator.tsx';
+import PersonSkeleton from '../components/PersonSkeleton/PersonSkeleton.tsx';
 
 export default function MoviePage() {
   const { id } = useParams<{ id: string }>();
@@ -31,17 +39,20 @@ export default function MoviePage() {
         setError(null);
         const movieId = Number(id);
         if (isNaN(movieId)) {
-          throw new Error('Invalid movie ID');
+          throw new Error('Невалидный ID');
         }
         await MoviesStore.loadMovieDetails(movieId);
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load movie');
+        setError(
+          err instanceof Error ? err.message : 'Не удалось загрузить фильм'
+        );
       } finally {
         setIsLoading(false);
       }
     };
-
-    loadMovie();
+    setTimeout(function () {
+      loadMovie();
+    }, 800);
   }, [id]);
 
   const movie = MoviesStore?.currentMovie;
@@ -71,19 +82,40 @@ export default function MoviePage() {
         mb={4}
       >
         <Box flex={1} sx={{ maxWidth: { md: 400 } }}>
-          <img
-            src={movie?.poster?.url || movie?.poster?.previewUrl}
-            alt={
-              movie?.name
-                ? `Тут должен быть постер фильма ${movie.name}  `
-                : 'Постер фильма'
-            }
-            style={{
+          <CardMedia
+            component="div"
+            sx={{
+              position: 'relative',
               width: '100%',
-              borderRadius: 8,
-              boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+              paddingTop: '150%',
+              overflow: 'hidden',
+              backgroundImage: movie?.poster?.previewUrl
+                ? `url(${movie.poster.previewUrl})`
+                : 'linear-gradient(45deg, #f5f5f5 25%, #e0e0e0 50%, #f5f5f5 75%)',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center center',
             }}
-          />
+          >
+            {!movie?.poster?.previewUrl && (
+              <Box
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <TbBinocularsFilled size={200} />
+                <Typography variant="body1">Постер не найден</Typography>
+              </Box>
+            )}
+          </CardMedia>
         </Box>
 
         <Box flex={2}>
@@ -96,6 +128,7 @@ export default function MoviePage() {
               }
               color="primary"
               size="small"
+              sx={{ cursor: 'default' }}
             />
             {movie.genres?.map((genre) => (
               <Chip
@@ -108,8 +141,7 @@ export default function MoviePage() {
             ))}
           </Stack>
 
-          <Typography variant="body1">{movie.description}</Typography>
-
+          <Divider sx={{ my: 2 }} />
           <Box display="flex" alignItems="center" gap={2} mb={2}>
             <SiKinopoisk size={20} style={{ color: '#ff6600' }} />
             <Rating
@@ -131,13 +163,11 @@ export default function MoviePage() {
               {movie.rating?.imdb?.toFixed(1)}/10
             </Typography>
           </Box>
-
           <Divider sx={{ my: 2 }} />
-
           <Grid
             sx={{
               display: 'flex',
-              justifyContent: 'space-around',
+              justifyContent: 'space-between',
               flexWrap: 'nowrap',
             }}
           >
@@ -145,7 +175,7 @@ export default function MoviePage() {
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 alignContent: 'center',
               }}
             >
@@ -154,14 +184,15 @@ export default function MoviePage() {
               </Typography>
 
               <Typography variant="subtitle2">
-                {movie?.fees?.world.value} {movie?.fees?.world.currency}
+                {movie?.fees ? movie.fees.world.value : '-'}{' '}
+                {movie?.fees?.world.currency}
               </Typography>
             </Grid>
             <Grid
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 alignContent: 'center',
               }}
             >
@@ -175,7 +206,7 @@ export default function MoviePage() {
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 alignContent: 'center',
               }}
             >
@@ -190,7 +221,7 @@ export default function MoviePage() {
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                alignItems: 'center',
+                alignItems: 'flex-start',
                 alignContent: 'center',
               }}
             >
@@ -202,6 +233,58 @@ export default function MoviePage() {
               </Typography>
             </Grid>
           </Grid>
+          <Divider sx={{ my: 2 }} />
+          <Box>
+            <Typography variant="body2" color="textSecondary">
+              Описание:
+            </Typography>
+            <Typography component="div">
+              {movie.description === null ? (
+                <LoremGenerator />
+              ) : (
+                movie.description
+              )}
+            </Typography>
+          </Box>
+
+          <Divider sx={{ my: 2 }} />
+
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignContent: 'center',
+              flexDirection: 'column',
+            }}
+          >
+            <Typography variant="body2" color="textSecondary">
+              В ролях:{' '}
+            </Typography>
+
+            <List
+              dense
+              sx={{
+                width: '100%',
+                columnCount: 2,
+                columnGap: '16px',
+                bgcolor: 'background.paper',
+              }}
+            >
+              {movie?.persons.map((person) => (
+                <ListItem key={person.id}>
+                  <ListItemButton>
+                    <ListItemAvatar>
+                      <Avatar
+                        src={person.photo}
+                        alt={person.name.slice(0, 1)}
+                      />
+                    </ListItemAvatar>
+                    <ListItemText>{person.name} </ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+          </Box>
         </Box>
       </Box>
     </Box>

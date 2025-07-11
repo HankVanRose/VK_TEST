@@ -65,7 +65,7 @@ class MoviesStore {
         this.currentMovie = null;
       });
       const response = await axios.get<ICurrentMovieApiResponse>(
-        `../.././secondFilm.json`,
+        `../.././film.json`,
         {
           // headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
         }
@@ -76,7 +76,7 @@ class MoviesStore {
         console.log(toJS(this.currentMovie));
       });
     } catch (error) {
-      console.error('Failed to load movie details:', error);
+      console.error('Не удалось загрузить данные о фильме:', error);
     }
   }
 
