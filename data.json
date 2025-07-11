@@ -465,6 +465,795 @@
       "ticketsOnSale": false
     },
     {
+      "id": 8370940,
+      "name": null,
+      "alternativeName": "MANES",
+      "type": "tv-series",
+      "typeNumber": 2,
+      "year": 2023,
+      "description": null,
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 6.4,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 253,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": null,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "genres": [
+        {
+          "name": "драма"
+        },
+        {
+          "name": "комедия"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Колумбия"
+        }
+      ],
+      "releaseYears": [
+        {
+          "start": 2023,
+          "end": null
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": true,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8365832,
+      "name": null,
+      "alternativeName": "Amour Éternel",
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2016,
+      "description": null,
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 52,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": 18,
+      "genres": [
+        {
+          "name": "драма"
+        },
+        {
+          "name": "мелодрама"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Франция"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8371200,
+      "name": null,
+      "alternativeName": "Triumph",
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2018,
+      "description": null,
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 8.4,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 35,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 88,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "genres": [
+        {
+          "name": "документальный"
+        },
+        {
+          "name": "спорт"
+        }
+      ],
+      "countries": [
+        {
+          "name": "США"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8381334,
+      "name": null,
+      "alternativeName": "Big Cats, Small World",
+      "type": "tv-series",
+      "typeNumber": 2,
+      "year": 2024,
+      "description": null,
+      "shortDescription": null,
+      "status": "completed",
+      "rating": {
+        "kp": 0,
+        "imdb": 7.6,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 11,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": null,
+      "totalSeriesLength": 96,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "genres": [
+        {
+          "name": "документальный"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Канада"
+        },
+        {
+          "name": "Великобритания"
+        }
+      ],
+      "releaseYears": [
+        {
+          "start": 2024,
+          "end": 2024
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": true,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8377629,
+      "name": null,
+      "alternativeName": "Fotos Privadas",
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2020,
+      "description": null,
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 6.6,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 148,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 20,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "genres": [
+        {
+          "name": "короткометражка"
+        },
+        {
+          "name": "драма"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Бразилия"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8371192,
+      "name": null,
+      "alternativeName": "Años cortos días eternos",
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2021,
+      "description": null,
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 8.5,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 6,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 62,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "genres": [
+        {
+          "name": "документальный"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Аргентина"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8368515,
+      "name": "Между страхом и любовью",
+      "alternativeName": "Between Fear and Love",
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2021,
+      "description": null,
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 15,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "genres": [
+        {
+          "name": "короткометражка"
+        },
+        {
+          "name": "драма"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Италия"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8385120,
+      "name": "Тайна затерянного острова",
+      "alternativeName": "Duda & Dada The Secret of HooHoo Island",
+      "enName": null,
+      "type": "cartoon",
+      "typeNumber": 3,
+      "year": 2023,
+      "description": "Маленький крот по имени Дуду просит подругу Даду о помощи и отправляется на секретный остров Хуху, чтобы отыскать маму.",
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 1,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 83,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "poster": {
+        "url": "https://image.openmoviedb.com/kinopoisk-images/10592371/4cb7d695-6b25-4cb9-8451-10a823fb9373/600x900",
+        "previewUrl": "https://image.openmoviedb.com/kinopoisk-images/10592371/4cb7d695-6b25-4cb9-8451-10a823fb9373/300x450"
+      },
+      "genres": [
+        {
+          "name": "мультфильм"
+        },
+        {
+          "name": "приключения"
+        },
+        {
+          "name": "детский"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Корея Южная"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8371202,
+      "name": "Маша по лаве шагала",
+      "alternativeName": null,
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2023,
+      "description": "Маше 19 лет. Она еще не понимает, что будет делать в будущем, зато уже сейчас она встречается с двумя парнями одновременно. Днем она проводит время с романтиком Васей, а по вечерам видится с брутальным Эдуардом.\nДевушке удачно удается скрывать парней друг от друга, но когда ее интригу раскрывает Вася, Маше нужно будет принять окончательное решение с кем же из двух любовников она останется в итоге.",
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 12,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 7,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": 18,
+      "poster": {
+        "url": "https://image.openmoviedb.com/kinopoisk-images/10703959/35039383-279a-402f-9eb7-0b3df6e65072/600x900",
+        "previewUrl": "https://image.openmoviedb.com/kinopoisk-images/10703959/35039383-279a-402f-9eb7-0b3df6e65072/300x450"
+      },
+      "genres": [
+        {
+          "name": "короткометражка"
+        },
+        {
+          "name": "комедия"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Россия"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8381320,
+      "name": "Вверх ногами",
+      "alternativeName": "Upside Down",
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2023,
+      "description": null,
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 12,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "genres": [
+        {
+          "name": "короткометражка"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Латвия"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8377630,
+      "name": null,
+      "alternativeName": "Shohorer Ushnotomo Din E",
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2023,
+      "description": null,
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 6.7,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 725,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 117,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "genres": [
+        {
+          "name": "мелодрама"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Индия"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8368121,
+      "name": "Обряд",
+      "alternativeName": null,
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2023,
+      "description": "Об изгнанных из Рая.",
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 9,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": 16,
+      "genres": [
+        {
+          "name": "короткометражка"
+        },
+        {
+          "name": "драма"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Россия"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8380451,
+      "name": "БАМ – не просто стройка",
+      "alternativeName": null,
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2024,
+      "description": "Байкало-Амурская магистраль — стройка века, символ советской эпохи. Стальной путь к океану через скалы, болота, вечную мерзлоту. Одна из самых протяжённых железных дорог в мире — её длина превышает 4 тысячи километров. В строительстве БАМа участвовало около 2 млн человек 108 национальностей.\nСегодня история легендарной магистрали продолжается: здесь прокладывают второй путь, строят новые мосты и тоннели, внедряют цифровую автоматику. Новая жизнь БАМа — это современные технологии, рост грузопотока, эффективные и безопасные перевозки.\nНиколай Валуев, чемпион мира по боксу и депутат Госдумы РФ, приехал на Дальний Восток исполнить детскую мечту: увидеть БАМ. За 10 дней он преодолел сотни километров, попробовал управлять экскаватором и большегрузным самосвалом, испытал на себе быт вахтовиков.",
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 11,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 44,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": 12,
+      "poster": {
+        "url": "https://image.openmoviedb.com/kinopoisk-images/10592371/4917f816-c0bc-46de-8898-aa12d8eb06c6/600x900",
+        "previewUrl": "https://image.openmoviedb.com/kinopoisk-images/10592371/4917f816-c0bc-46de-8898-aa12d8eb06c6/300x450"
+      },
+      "backdrop": {
+        "url": "https://image.openmoviedb.com/kinopoisk-ott-images/1672343/2a00000197d550d58cedf9251f453e06821f/1344x756",
+        "previewUrl": "https://image.openmoviedb.com/kinopoisk-ott-images/1672343/2a00000197d550d58cedf9251f453e06821f/678x380"
+      },
+      "genres": [
+        {
+          "name": "документальный"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Россия"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8380904,
+      "name": null,
+      "alternativeName": "Only Child",
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2024,
+      "description": null,
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 6.5,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 26,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 98,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "genres": [
+        {
+          "name": "драма"
+        }
+      ],
+      "countries": [
+        {
+          "name": "США"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8371194,
+      "name": "Однажды... Мишель Легран",
+      "alternativeName": "Il était une fois Michel Legrand",
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2024,
+      "description": null,
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 7.9,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 51,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 109,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "poster": {
+        "url": "https://image.openmoviedb.com/kinopoisk-images/10900341/d5127476-0e0c-4a9f-9fdc-cee50937ae75/600x900",
+        "previewUrl": "https://image.openmoviedb.com/kinopoisk-images/10900341/d5127476-0e0c-4a9f-9fdc-cee50937ae75/300x450"
+      },
+      "genres": [
+        {
+          "name": "документальный"
+        },
+        {
+          "name": "биография"
+        },
+        {
+          "name": "музыка"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Франция"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
+      "id": 8377628,
+      "name": null,
+      "alternativeName": "Pärchenabend",
+      "enName": null,
+      "type": "movie",
+      "typeNumber": 1,
+      "year": 2024,
+      "description": null,
+      "shortDescription": null,
+      "status": null,
+      "rating": {
+        "kp": 0,
+        "imdb": 5.5,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "votes": {
+        "kp": 0,
+        "imdb": 49,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+      },
+      "movieLength": 88,
+      "totalSeriesLength": null,
+      "seriesLength": null,
+      "ratingMpaa": null,
+      "ageRating": null,
+      "genres": [
+        {
+          "name": "драма"
+        },
+        {
+          "name": "комедия"
+        }
+      ],
+      "countries": [
+        {
+          "name": "Германия"
+        }
+      ],
+      "top10": null,
+      "top250": null,
+      "isSeries": false,
+      "ticketsOnSale": false
+    },
+    {
       "id": 8370939,
       "name": null,
       "alternativeName": "Anyaság",

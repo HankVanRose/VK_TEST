@@ -73,7 +73,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
           height: 'fit-content',
         }}
       >
-        {movie.name ? (
+        {movie?.name ? (
           <Typography
             variant="body1"
             fontWeight="medium"
@@ -83,7 +83,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
           </Typography>
         ) : (
           <Typography variant="body1" fontWeight="medium">
-            {movie.alternativeName}
+            {movie?.alternativeName}
           </Typography>
         )}
         <Typography variant="body1">{movie?.year}</Typography>
@@ -98,14 +98,14 @@ export default function MovieCard({ movie }: MovieCardProps) {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <SiKinopoisk size={30} style={{ color: '#ff6600' }} />
             <Typography variant="body1" sx={{ fontSize: '20px' }}>
-              {rates.kp}
+              {rates?.kp}
             </Typography>
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <FaImdb size={30} style={{ color: '#f5c518' }} />
             <Typography variant="body1" sx={{ fontSize: '20px' }}>
-              {rates.imdb}
+              {rates?.imdb}
             </Typography>
           </Box>
         </Box>

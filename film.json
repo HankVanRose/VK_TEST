@@ -1,0 +1,158 @@
+{
+  "id": 8385120,
+  "name": "Тайна затерянного острова",
+  "alternativeName": "Duda & Dada The Secret of HooHoo Island",
+  "enName": null,
+  "type": "cartoon",
+  "typeNumber": 3,
+  "year": 2023,
+  "description": "Маленький крот по имени Дуду просит подругу Даду о помощи и отправляется на секретный остров Хуху, чтобы отыскать маму.",
+  "shortDescription": null,
+  "slogan": null,
+  "status": null,
+  "rating": {
+    "kp": 0,
+    "imdb": 0,
+    "filmCritics": 0,
+    "russianFilmCritics": 0,
+    "await": 0
+  },
+  "votes": {
+    "kp": 1,
+    "imdb": 0,
+    "filmCritics": 0,
+    "russianFilmCritics": 0,
+    "await": 0
+  },
+  "movieLength": 83,
+  "totalSeriesLength": null,
+  "seriesLength": null,
+  "ratingMpaa": null,
+  "ageRating": null,
+  "poster": {
+    "url": "https://image.openmoviedb.com/kinopoisk-images/10592371/4cb7d695-6b25-4cb9-8451-10a823fb9373/600x900",
+    "previewUrl": "https://image.openmoviedb.com/kinopoisk-images/10592371/4cb7d695-6b25-4cb9-8451-10a823fb9373/300x450"
+  },
+  "genres": [
+    {
+      "name": "мультфильм"
+    },
+    {
+      "name": "приключения"
+    },
+    {
+      "name": "детский"
+    }
+  ],
+  "countries": [
+    {
+      "name": "Корея Южная"
+    }
+  ],
+  "persons": [
+    {
+      "id": 10344578,
+      "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_10344578.jpg",
+      "name": "Ли Ён-а",
+      "enName": "Lee Yeong-ah",
+      "description": null,
+      "profession": "актеры",
+      "enProfession": "actor"
+    },
+    {
+      "id": 10344579,
+      "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_10344579.jpg",
+      "name": "Чан Гён-хи",
+      "enName": "Jang Gyeong-hee",
+      "description": null,
+      "profession": "актеры",
+      "enProfession": "actor"
+    },
+    {
+      "id": 2975803,
+      "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_2975803.jpg",
+      "name": "Ом Сан-хён",
+      "enName": "Eom Sang-hyeon",
+      "description": null,
+      "profession": "актеры",
+      "enProfession": "actor"
+    },
+    {
+      "id": 7127301,
+      "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_7127301.jpg",
+      "name": "Ли Со-ён",
+      "enName": "Lee So-yeong",
+      "description": null,
+      "profession": "актеры",
+      "enProfession": "actor"
+    },
+    {
+      "id": 4518476,
+      "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_4518476.jpg",
+      "name": "Ким Со-ён",
+      "enName": "Kim Seo-yeong",
+      "description": null,
+      "profession": "актеры",
+      "enProfession": "actor"
+    },
+    {
+      "id": 5332591,
+      "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_5332591.jpg",
+      "name": "Ё Мин-джон",
+      "enName": "Yeo Min-jeong",
+      "description": null,
+      "profession": "актеры",
+      "enProfession": "actor"
+    },
+    {
+      "id": 2904107,
+      "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_2904107.jpg",
+      "name": "Щин Ён-у",
+      "enName": "Shin Yong-woo",
+      "description": null,
+      "profession": "актеры",
+      "enProfession": "actor"
+    },
+    {
+      "id": 10344576,
+      "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_10344576.jpg",
+      "name": "Чхве Бён-сон",
+      "enName": "Choi Byeong-seon",
+      "description": null,
+      "profession": "режиссеры",
+      "enProfession": "director"
+    },
+    {
+      "id": 10344577,
+      "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_10344577.jpg",
+      "name": "Ким Джи-юн",
+      "enName": "Kim Ji-yoon",
+      "description": null,
+      "profession": "режиссеры",
+      "enProfession": "director"
+    }
+  ],
+  "fees": {
+    "world": {
+      "value": 852867,
+      "currency": "$"
+    }
+  },
+  "premiere": {
+    "world": "2023-02-15T00:00:00.000Z"
+  },
+  "top10": null,
+  "top250": null,
+  "isSeries": false,
+  "audience": [
+    {
+      "count": 126039,
+      "country": "Корея Южная"
+    }
+  ],
+  "ticketsOnSale": false,
+  "lists": [],
+  "watchabilityParsed": false,
+  "createdAt": "2025-07-06T17:56:12.400Z",
+  "updatedAt": "2025-07-06T17:56:12.400Z"
+}

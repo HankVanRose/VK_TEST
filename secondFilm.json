@@ -1,0 +1,190 @@
+{
+    "id": 8371323,
+    "name": "Непокоренные",
+    "alternativeName": null,
+    "type": "tv-series",
+    "typeNumber": 2,
+    "year": 2025,
+    "description": null,
+    "shortDescription": null,
+    "slogan": "Города, которые не сдались. Люди, которые не дрогнули. История, которая не умрёт.",
+    "status": "completed",
+    "rating": {
+        "kp": 0,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+    },
+    "votes": {
+        "kp": 3,
+        "imdb": 0,
+        "filmCritics": 0,
+        "russianFilmCritics": 0,
+        "await": 0
+    },
+    "movieLength": null,
+    "totalSeriesLength": null,
+    "seriesLength": 20,
+    "ratingMpaa": null,
+    "ageRating": 18,
+    "poster": {
+        "url": "https://image.openmoviedb.com/kinopoisk-images/10703959/a5436edf-bb42-417b-9610-b2a86dac5db4/600x900",
+        "previewUrl": "https://image.openmoviedb.com/kinopoisk-images/10703959/a5436edf-bb42-417b-9610-b2a86dac5db4/300x450"
+    },
+    "genres": [
+        {
+            "name": "документальный"
+        },
+        {
+            "name": "история"
+        }
+    ],
+    "countries": [
+        {
+            "name": "Россия"
+        }
+    ],
+    "persons": [
+        {
+            "id": 1193331,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_1193331.jpg",
+            "name": "Сергей Бурунов",
+            "enName": null,
+            "description": null,
+            "profession": "актеры",
+            "enProfession": "actor"
+        },
+        {
+            "id": 7072601,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_7072601.jpg",
+            "name": "Антон Шанихин",
+            "enName": null,
+            "description": null,
+            "profession": "композиторы",
+            "enProfession": "composer"
+        },
+        {
+            "id": 7057921,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_7057921.jpg",
+            "name": "Михаил Райхельгауз",
+            "enName": null,
+            "description": null,
+            "profession": "режиссеры",
+            "enProfession": "director"
+        },
+        {
+            "id": 7115784,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_7115784.jpg",
+            "name": "Иосиф Райхельгауз",
+            "enName": null,
+            "description": null,
+            "profession": "режиссеры",
+            "enProfession": "director"
+        },
+        {
+            "id": 6559678,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_6559678.jpg",
+            "name": "Алексей Жарков",
+            "enName": null,
+            "description": null,
+            "profession": "режиссеры",
+            "enProfession": "director"
+        },
+        {
+            "id": 3025424,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_3025424.jpg",
+            "name": "Илларион Ершов",
+            "enName": null,
+            "description": null,
+            "profession": "операторы",
+            "enProfession": "operator"
+        },
+        {
+            "id": 7057923,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_7057923.jpg",
+            "name": "Кирилл Брейдо",
+            "enName": null,
+            "description": null,
+            "profession": "продюсеры",
+            "enProfession": "producer"
+        },
+        {
+            "id": 4387144,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_4387144.jpg",
+            "name": "Давид Кочаров",
+            "enName": null,
+            "description": null,
+            "profession": "продюсеры",
+            "enProfession": "producer"
+        },
+        {
+            "id": 10344168,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_10344168.jpg",
+            "name": "Алексей Федоров",
+            "enName": null,
+            "description": null,
+            "profession": "продюсеры",
+            "enProfession": "producer"
+        },
+        {
+            "id": 7072594,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_7072594.jpg",
+            "name": "Аида Сулейманова",
+            "enName": null,
+            "description": null,
+            "profession": "продюсеры",
+            "enProfession": "producer"
+        },
+        {
+            "id": 4766220,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_4766220.jpg",
+            "name": "Илья Васильев",
+            "enName": null,
+            "description": null,
+            "profession": "сценаристы",
+            "enProfession": "writer"
+        },
+        {
+            "id": 6658368,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_6658368.jpg",
+            "name": "Антон Шустов",
+            "enName": null,
+            "description": null,
+            "profession": "сценаристы",
+            "enProfession": "writer"
+        },
+        {
+            "id": 10344166,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_10344166.jpg",
+            "name": "Юлия Макарова",
+            "enName": null,
+            "description": null,
+            "profession": "сценаристы",
+            "enProfession": "writer"
+        },
+        {
+            "id": 10344167,
+            "photo": "https://image.openmoviedb.com/kinopoisk-st-images//actor_iphone/iphone360_10344167.jpg",
+            "name": "Андрей Соболевский",
+            "enName": null,
+            "description": null,
+            "profession": "сценаристы",
+            "enProfession": "writer"
+        }
+    ],
+    "releaseYears": [
+        {
+            "start": 2025,
+            "end": 2025
+        }
+    ],
+    "top10": null,
+    "top250": null,
+    "isSeries": true,
+    "ticketsOnSale": false,
+    "lists": [],
+    "watchabilityParsed": false,
+    "createdAt": "2025-07-06T17:56:09.678Z",
+    "updatedAt": "2025-07-06T17:56:09.678Z"
+}

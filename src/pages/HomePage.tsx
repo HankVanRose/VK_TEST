@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import MovieList from '../components/MovieList/MovieList';
 
 import { Box } from '@mui/material';
-import MoviesStore from '../store/MovieStore';
+import MoviesStore from '../store/MoviesStore';
 import { observer } from 'mobx-react-lite';
 
 const HomePage = observer(() => {
@@ -14,18 +14,17 @@ const HomePage = observer(() => {
       const pageHeight = document.documentElement.scrollHeight;
 
       if (
-        scrollPosition >= pageHeight - 100 &&
+        scrollPosition >= pageHeight - 300 &&
         !MoviesStore.isLoading &&
         MoviesStore.moreToLoad
       ) {
         MoviesStore.loadMovies();
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-    
     };
   }, []);
   return (
