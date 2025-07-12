@@ -1,17 +1,19 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, toJS } from 'mobx';
 
-import type { Movie, Movies } from '../api/types/movies';
+import type { ICurrentMovie } from '../api/types/currentMovie';
 
 class FavoriteMovieStore {
-  favorites: Movies = [];
-  isDialogOpen = false;
-  selectedMovie: Movie | null = null;
+  favorites: ICurrentMovie[] = [];
+  chosenMovie: ICurrentMovie | null = null;
 
   constructor() {
     makeAutoObservable(this);
     this.loadFavorites();
   }
 
+  setChosenMovie(movie: ICurrentMovie | null) {
+    this.chosenMovie = movie;
+  }
   loadFavorites() {
     const saved = localStorage.getItem('favorites');
     if (saved) {
@@ -19,30 +21,35 @@ class FavoriteMovieStore {
     }
   }
 
-  saveFavorites() {
+  saveToFavorites() {
     localStorage.setItem('favorites', JSON.stringify(this.favorites));
   }
 
-  isInFavorites(id: number) {
+  checkIsMovieInFavorites(id: number) {
     return this.favorites.some((movie) => movie.id === id);
   }
 
-  openConfirmationDialog(movie: Movie) {
-    this.selectedMovie = movie;
-    this.isDialogOpen = true;
-  }
-
-  closeDialog() {
-    this.isDialogOpen = false;
-    this.selectedMovie = null;
-  }
-
-  addToFavorites() {
-    if (this.selectedMovie && !this.isInFavorites(this.selectedMovie.id)) {
-      this.favorites.push(this.selectedMovie);
-      this.saveFavorites();
+  addFavoriteMovie(movie: ICurrentMovie) {
+    if (movie && !this.checkIsMovieInFavorites(movie.id)) {
+      this.favorites.push(movie);
+      this.saveToFavorites();
+      console.log(toJS(movie));
     }
-    this.closeDialog();
+  }
+
+  deleteFromFavorites(movieToDelete: ICurrentMovie) {
+    this.favorites = this.favorites.filter(
+      (movie) => movie.id !== movieToDelete.id
+    );
+    this.saveToFavorites();
+
+    return this.favorites;
+  }
+
+  deleteAllFavorites() {
+    localStorage.removeItem('favorites');
+    
+ this.favorites = [];
   }
 }
 

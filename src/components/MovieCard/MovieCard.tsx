@@ -8,15 +8,14 @@ import { Box } from '@mui/material';
 import { FaImdb } from 'react-icons/fa';
 import { SiKinopoisk } from 'react-icons/si';
 import { useNavigate } from 'react-router';
+import type { ICurrentMovie } from '../../api/types/currentMovie';
 interface MovieCardProps {
-  movie: Movie;
+  movie: Movie | ICurrentMovie;
 }
 
 export default function MovieCard({ movie }: MovieCardProps) {
-  const { kp, imdb } = movie.rating;
-  const rates = { kp, imdb };
+ 
   const navigate = useNavigate();
-  
 
   return (
     <Card
@@ -99,14 +98,14 @@ export default function MovieCard({ movie }: MovieCardProps) {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <SiKinopoisk size={30} style={{ color: '#ff6600' }} />
             <Typography variant="body1" sx={{ fontSize: '20px' }}>
-              {rates?.kp}
+              {movie.rating?.kp}
             </Typography>
           </Box>
 
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
             <FaImdb size={30} style={{ color: '#f5c518' }} />
             <Typography variant="body1" sx={{ fontSize: '20px' }}>
-              {rates?.imdb}
+              {movie.rating?.imdb}
             </Typography>
           </Box>
         </Box>

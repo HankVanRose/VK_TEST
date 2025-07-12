@@ -1,17 +1,15 @@
- 
+import { Box, Typography } from '@mui/material';
 
-const LoremGenerator  = ({ paragraphs = 1 }) => {
+const LoremGenerator = () => {
   const loremText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
   Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
   Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.`;
 
   return (
-    <div>
-      {Array.from({ length: paragraphs }).map((_, i) => (
-        <span key={i}>{loremText}</span>
-      ))}
-    </div>
+    <Box>
+      <Typography> {loremText}</Typography>
+    </Box>
   );
 };
 
-export default LoremGenerator ;
+export default LoremGenerator;

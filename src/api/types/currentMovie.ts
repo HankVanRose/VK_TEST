@@ -80,9 +80,5 @@ export interface Rating {
 }
 
 export interface ICurrentMovieApiResponse {
-  docs: ICurrentMovie[];
-  total: number;
-  limit: number;
-  page: number;
-  pages: number;
+  movie: ICurrentMovie
 }

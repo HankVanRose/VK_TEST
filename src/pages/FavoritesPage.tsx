@@ -1,29 +1,120 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-
-import { Grid, Box, Typography } from '@mui/material';
+import { TiDelete } from 'react-icons/ti';
+import { Grid, Box, Typography, Button, Container, Paper } from '@mui/material';
 import MovieCard from '../components/MovieCard/MovieCard';
 import FavoriteMovieStore from '../store/FavoriteMovieStore';
+import { useNavigate } from 'react-router';
 
 const FavoritesPage: React.FC = observer(() => {
+  useEffect(() => {
+    const loadFavorites = () => {
+      FavoriteMovieStore.loadFavorites();
+    };
+    loadFavorites();
+  }, []);
   const favorites = FavoriteMovieStore.favorites;
+  const navigate = useNavigate();
   return (
-    <Box p={3}>
-      <Typography variant="h4" gutterBottom>
-        Избранные фильмы
-      </Typography>
-      {favorites.length === 0 ? (
-        <Typography>У вас пока нет избранных фильмов</Typography>
-      ) : (
-        <Grid container spacing={3}>
-          {favorites.map((movie) => (
-            <Grid key={movie.id}>
-              <MovieCard movie={movie} />
-            </Grid>
-          ))}
-        </Grid>
-      )}
-    </Box>
+    <Container maxWidth="xl" sx={{ py: 4 }}>
+      <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            mb: 3,
+          }}
+        >
+          <Button
+            variant="outlined"
+            onClick={() => navigate('/')}
+            sx={{
+              textTransform: 'none',
+              borderRadius: '20px',
+              px: 3,
+            }}
+          >
+            Назад
+          </Button>
+
+          <Typography
+            variant="h4"
+            component="h1"
+            sx={{
+              fontWeight: 600,
+            }}
+          >
+            Избранные фильмы
+          </Typography>
+
+          <Button
+            variant="contained"
+            color="error"
+            onClick={() => FavoriteMovieStore.deleteAllFavorites()}
+            sx={{
+              textTransform: 'none',
+              borderRadius: '20px',
+              px: 3,
+            }}
+          >
+            Очистить всё
+          </Button>
+        </Box>
+
+        {favorites.length === 0 ? (
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              py: 10,
+              gap: 2,
+            }}
+          >
+            <Typography variant="h6" color="text.secondary">
+              Ваш список избранного пуст
+            </Typography>
+            <Button
+              variant="contained"
+              onClick={() => navigate('/')}
+              sx={{
+                textTransform: 'none',
+                borderRadius: '20px',
+                px: 4,
+                py: 1,
+              }}
+            >
+              Найти фильмы
+            </Button>
+          </Box>
+        ) : (
+          <Grid container spacing={4}>
+            {favorites.map((movie) => (
+              <Grid key={movie.id}>
+                <Box sx={{ position: 'relative' }}>
+                  <MovieCard movie={movie} />
+                  <TiDelete
+                    aria-label="delete"
+                    onClick={() =>
+                      FavoriteMovieStore.deleteFromFavorites(movie)
+                    }
+                    size={30}
+                    style={{
+                      position: 'absolute',
+                      top: 8,
+                      right: 8,
+                      color: 'red',
+                      cursor: 'pointer',
+                    }}
+                  ></TiDelete>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        )}
+      </Paper>
+    </Container>
   );
 });
 

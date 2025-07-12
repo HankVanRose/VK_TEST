@@ -7,7 +7,6 @@ import { Link } from 'react-router';
 
 import { observer } from 'mobx-react-lite';
 
-import { Avatar } from '@mui/material';
 import UserStore from '../../store/UserStore';
 
 const Header = observer(() => {
@@ -33,11 +32,9 @@ const Header = observer(() => {
               >
                 ИЗБРАННОЕ
               </Typography>
-              <Avatar sx={{ bgcolor: 'secondary.main' }}>
-                {UserStore.currentUser.username.charAt(0).toUpperCase()}
-              </Avatar>
+
               <Typography>
-                {UserStore.currentUser.username.toUpperCase()}
+                Привет: {UserStore.currentUser.username.toUpperCase()}
               </Typography>
               <Button color="inherit" onClick={() => UserStore.logout()}>
                 Выйти
