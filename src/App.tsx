@@ -5,6 +5,9 @@ import MoviePage from './pages/MoviePage';
 import Layout from './pages/Layout';
 import Registration from './pages/Registration';
 import Login from './pages/LogIn';
+import Page404 from './pages/Page404';
+import FavoritesPage from './pages/FavoritesPage';
+ 
 
 function App() {
   return (
@@ -13,8 +16,10 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/movie/:id" element={<MoviePage />} />
-           <Route path="/register" element={<Registration />} />
-           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/*" element={<Page404 />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
         </Route>
       </Routes>
     </>

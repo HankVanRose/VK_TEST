@@ -73,7 +73,7 @@ class MoviesStore {
       const foundMovie = response.data.docs.find((el) => el.id === id);
       runInAction(() => {
         this.currentMovie = foundMovie || null;
-        console.log(toJS(this.currentMovie));
+        console.log(`inStore`,toJS(this.currentMovie));
       });
     } catch (error) {
       console.error('Не удалось загрузить данные о фильме:', error);
