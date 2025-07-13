@@ -4,16 +4,12 @@ import type { ICurrentMovie } from '../api/types/currentMovie';
 
 class FavoriteMovieStore {
   favorites: ICurrentMovie[] = [];
-  chosenMovie: ICurrentMovie | null = null;
 
   constructor() {
     makeAutoObservable(this);
     this.loadFavorites();
   }
 
-  setChosenMovie(movie: ICurrentMovie | null) {
-    this.chosenMovie = movie;
-  }
   loadFavorites() {
     const saved = localStorage.getItem('favorites');
     if (saved) {
@@ -29,7 +25,7 @@ class FavoriteMovieStore {
     return this.favorites.some((movie) => movie.id === id);
   }
 
-  addFavoriteMovie(movie: ICurrentMovie) {
+  addFavoriteMovie(movie: ICurrentMovie | null) {
     if (movie && !this.checkIsMovieInFavorites(movie.id)) {
       this.favorites.push(movie);
       this.saveToFavorites();
@@ -48,8 +44,8 @@ class FavoriteMovieStore {
 
   deleteAllFavorites() {
     localStorage.removeItem('favorites');
-    
- this.favorites = [];
+
+    this.favorites = [];
   }
 }
 

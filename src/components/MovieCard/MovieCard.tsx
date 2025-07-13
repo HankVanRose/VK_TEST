@@ -79,7 +79,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
             fontWeight="medium"
             sx={{ textAlign: 'center' }}
           >
-            {movie?.name}
+            {movie?.name || movie?.alternativeName}
           </Typography>
         ) : (
           <Typography variant="body1" fontWeight="medium">

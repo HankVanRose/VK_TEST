@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { TiDelete } from 'react-icons/ti';
+
 import { Grid, Box, Typography, Button, Container, Paper } from '@mui/material';
 import MovieCard from '../components/MovieCard/MovieCard';
 import FavoriteMovieStore from '../store/FavoriteMovieStore';
@@ -16,7 +16,7 @@ const FavoritesPage: React.FC = observer(() => {
   const favorites = FavoriteMovieStore.favorites;
   const navigate = useNavigate();
   return (
-    <Container maxWidth="xl" sx={{ py: 4 }}>
+    <Container sx={{ py: 4 }}>
       <Paper elevation={3} sx={{ p: 3, mb: 3 }}>
         <Box
           sx={{
@@ -24,6 +24,7 @@ const FavoritesPage: React.FC = observer(() => {
             justifyContent: 'space-between',
             alignItems: 'center',
             mb: 3,
+            gap: 20,
           }}
         >
           <Button
@@ -89,25 +90,34 @@ const FavoritesPage: React.FC = observer(() => {
             </Button>
           </Box>
         ) : (
-          <Grid container spacing={4}>
+          <Grid
+            container
+            spacing={2}
+            sx={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+              justifyContent: 'center',
+              justifyItems: 'center',
+              gap: '30px 50px',
+              mt: 2.5,
+            }}
+          >
             {favorites.map((movie) => (
               <Grid key={movie.id}>
-                <Box sx={{ position: 'relative' }}>
+                <Box
+                  display={'flex'}
+                  justifyItems={'center'}
+                  flexDirection={'column'}
+                >
                   <MovieCard movie={movie} />
-                  <TiDelete
-                    aria-label="delete"
+                  <Button
+                    variant="contained"
                     onClick={() =>
                       FavoriteMovieStore.deleteFromFavorites(movie)
                     }
-                    size={30}
-                    style={{
-                      position: 'absolute',
-                      top: 8,
-                      right: 8,
-                      color: 'red',
-                      cursor: 'pointer',
-                    }}
-                  ></TiDelete>
+                  >
+                    УБРАТЬ
+                  </Button>
                 </Box>
               </Grid>
             ))}

@@ -4,6 +4,7 @@ import MovieList from '../components/MovieList/MovieList';
 import { Box } from '@mui/material';
 import MoviesStore from '../store/MoviesStore';
 import { observer } from 'mobx-react-lite';
+import Filters from '../components/Filters/Filters';
 
 const HomePage = observer(() => {
   useEffect(() => {
@@ -36,6 +37,7 @@ const HomePage = observer(() => {
         textAlign: 'center',
       }}
     >
+      <Filters />
       <MovieList movies={MoviesStore?.movies} />
     </Box>
   );

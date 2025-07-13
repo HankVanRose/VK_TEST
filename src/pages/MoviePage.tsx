@@ -1,37 +1,37 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useNavigate, useParams } from 'react-router';
-import MoviesStore from '../store/MoviesStore.ts';
+import { useParams } from 'react-router';
+import { observer } from 'mobx-react-lite';
 import {
-  Avatar,
+  Container,
+  Paper,
   Box,
-  Button,
-  Chip,
   Divider,
   Grid,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemButton,
-  ListItemText,
-  Stack,
   Typography,
+  useTheme,
 } from '@mui/material';
-import Loading from './Loading.tsx';
 import { SiKinopoisk } from 'react-icons/si';
 import { FaImdb } from 'react-icons/fa';
-import LoremGenerator from '../components/CurrentMovieCard/Lorem/LoremGenerator.tsx';
-import { MovieInfoItem } from '../components/CurrentMovieCard/MovieInfoItem/MovieInfoItem.tsx';
-import { RatingItem } from '../components/CurrentMovieCard/RatingItems/RatingItems.tsx';
-import { MoviePoster } from '../components/CurrentMovieCard/MoviePoster/MoviePoster.tsx';
-import { observer } from 'mobx-react-lite';
-import Page404 from './Page404.tsx';
-import FavoriteMovieStore from '../store/FavoriteMovieStore.ts';
+
+import MoviesStore from '../store/MoviesStore';
+
+import { MoviePoster } from '../components/CurrentMovieCard/MoviePoster/MoviePoster';
+import { RatingItem } from '../components/CurrentMovieCard/RatingItems/RatingItems';
+import { MovieInfoItem } from '../components/CurrentMovieCard/MovieInfoItem/MovieInfoItem';
+import LoremGenerator from '../components/CurrentMovieCard/Lorem/LoremGenerator';
+import Loading from './Loading';
+import Page404 from './Page404';
+import ModalWindow from '../components/ModalWindow/ModalWindow';
+import { ActorsList } from '../components/CurrentMovieCard/ActorsList';
+import { MovieHeader } from '../components/CurrentMovieCard/MovieHeader/MovieHeader';
+import { MovieTitle } from '../components/CurrentMovieCard/MovieTitle/MovieTitle';
+import { MovieMetadata } from '../components/CurrentMovieCard/MovieData';
 
 export const MoviePage = observer(() => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const theme = useTheme();
 
   useEffect(() => {
     const loadMovie = async () => {
@@ -69,35 +69,20 @@ export const MoviePage = observer(() => {
     () => movie?.countries?.map((c) => c.name).join(', '),
     [movie?.countries]
   );
-  const genres = useMemo(() => movie?.genres, [movie?.genres]);
 
   if (isLoading) return <Loading />;
   if (error) return <Typography color="error">{error}</Typography>;
-  if (!movie) return <Page404></Page404>;
+  if (!movie) return <Page404 />;
 
   return (
-    <>
-      <Box sx={{ p: 3, maxWidth: 1200, margin: '0 auto' }}>
-        <Button
-          variant="outlined"
-          onClick={() => navigate('/')}
-          sx={{
-            textTransform: 'none',
-            borderRadius: '20px',
-            px: 3,
-          }}
-        >
-          Назад
-        </Button>
-
-        <Typography variant="h3">
-          {movie.name} {movie.year}
-        </Typography>
-        {movie.alternativeName && (
-          <Typography variant="h6" color="textSecondary">
-            {movie.alternativeName}
-          </Typography>
-        )}
+    <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Paper elevation={3} sx={{ p: 3, borderRadius: 4 }}>
+        <MovieHeader movie={movie} />
+        <MovieTitle
+          name={movie.name}
+          alternativeName={movie.alternativeName}
+          year={movie.year}
+        />
 
         <Box
           display="flex"
@@ -105,57 +90,43 @@ export const MoviePage = observer(() => {
           flexDirection={{ xs: 'column', md: 'row' }}
           mb={4}
         >
-          <Box flex={1} sx={{ maxWidth: { md: 400 } }}>
+          <Box
+            flex={1}
+            sx={{
+              maxWidth: { md: 400 },
+              borderRadius: 2,
+              overflow: 'hidden',
+              boxShadow: theme.shadows[2],
+            }}
+          >
             <MoviePoster posterUrl={movie.poster?.previewUrl} />
           </Box>
 
           <Box flex={2}>
-            <Stack direction="row" spacing={1} mb={2} flexWrap="wrap">
-              <Chip
-                label={
-                  movie.ageRating
-                    ? `${movie.ageRating}+`
-                    : 'Нет возрастного рейтинга'
-                }
-                color="primary"
-                size="small"
-                sx={{ cursor: 'default' }}
-              />
-              {genres?.map((genre) => (
-                <Chip
-                  key={genre.name}
-                  label={genre.name}
-                  variant="outlined"
-                  size="small"
-                  sx={{ cursor: 'pointer' }}
-                />
-              ))}
-            </Stack>
-
-            <Divider sx={{ my: 2 }} />
+            <MovieMetadata ageRating={movie.ageRating} genres={movie.genres} />
 
             <Box
               display="flex"
               alignItems="center"
-              gap={2}
-              mb={2}
+              gap={3}
+              mb={3}
               flexWrap="wrap"
             >
               <RatingItem
-                icon={<SiKinopoisk size={20} style={{ color: '#ff6600' }} />}
+                icon={<SiKinopoisk size={24} style={{ color: '#ff6600' }} />}
                 value={movie.rating?.kp || 0}
                 label={`${ratingKp}/10`}
               />
               <RatingItem
-                icon={<FaImdb size={20} style={{ color: '#f5c518' }} />}
+                icon={<FaImdb size={24} style={{ color: '#f5c518' }} />}
                 value={movie.rating?.imdb || 0}
                 label={`${ratingImdb}/10`}
               />
             </Box>
 
-            <Divider sx={{ my: 2 }} />
+            <Divider sx={{ my: 3 }} />
 
-            <Grid container display={'flex'} justifyContent={'space-between'}>
+            <Grid container sx={{ mb: 3, justifyContent: 'space-between' }}>
               <MovieInfoItem
                 label="Сборы"
                 value={
@@ -172,57 +143,38 @@ export const MoviePage = observer(() => {
               <MovieInfoItem label="Страны" value={countries} />
             </Grid>
 
-            <Divider sx={{ my: 2 }} />
+            <Divider sx={{ my: 3 }} />
 
-            <Box mb={2}>
-              <Typography variant="body2" color="textSecondary" gutterBottom>
-                Описание:
+            <Box mb={3}>
+              <Typography
+                variant="h6"
+                sx={{
+                  mb: 2,
+                  color: theme.palette.text.primary,
+                  fontWeight: 600,
+                }}
+              >
+                Описание
               </Typography>
-              <Typography component={'div'}>
+              <Typography
+                component="div"
+                sx={{
+                  lineHeight: 1.6,
+                  color: theme.palette.text.secondary,
+                }}
+              >
                 {movie.description || <LoremGenerator />}
               </Typography>
             </Box>
 
-            <Divider sx={{ my: 2 }} />
+            <Divider sx={{ my: 3 }} />
 
-            {actors.length > 0 && (
-              <Box>
-                <Typography variant="body2" color="textSecondary" gutterBottom>
-                  В ролях:
-                </Typography>
-                <List
-                  dense
-                  sx={{
-                    width: '100%',
-                    columnCount: { xs: 1, sm: 2, md: 3 },
-                    columnGap: '18px',
-                    bgcolor: 'background.paper',
-                  }}
-                >
-                  {actors.map((person) => (
-                    <ListItem key={person.id} disablePadding>
-                      <ListItemButton>
-                        <ListItemAvatar>
-                          <Avatar src={person?.photo} />
-                        </ListItemAvatar>
-                        <ListItemText
-                          primary={person?.name}
-                          secondary={person?.enName}
-                        />
-                      </ListItemButton>
-                    </ListItem>
-                  ))}
-                </List>
-              </Box>
-            )}
+            {actors.length > 0 && <ActorsList actors={actors} />}
           </Box>
         </Box>
-        <Button onClick={() => FavoriteMovieStore.addFavoriteMovie(movie)}>
-          ДОБАВИТЬ В ИЗБРАННОЕ
-        </Button>
-      </Box>
-    </>
+
+        <ModalWindow />
+      </Paper>
+    </Container>
   );
 });
-
-export default MoviePage;

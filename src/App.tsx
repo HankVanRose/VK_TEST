@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router';
 import HomePage from './pages/HomePage';
 import './styles/App.css';
-import MoviePage from './pages/MoviePage';
+ 
 import Layout from './pages/Layout';
 import Registration from './pages/Registration';
 import Login from './pages/LogIn';
 import Page404 from './pages/Page404';
 import FavoritesPage from './pages/FavoritesPage';
+import { MoviePage } from './pages/MoviePage';
  
 
 function App() {
