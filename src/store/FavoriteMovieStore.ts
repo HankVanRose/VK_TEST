@@ -1,51 +1,76 @@
-import { makeAutoObservable, toJS } from 'mobx';
-
+import { makeAutoObservable } from 'mobx';
 import type { ICurrentMovie } from '../api/types/currentMovie';
+import UserStore from './UserStore';
 
 class FavoriteMovieStore {
-  favorites: ICurrentMovie[] = [];
+  private allFavorites: Record<string, ICurrentMovie[]> = {};
+  currentUserFavorites: ICurrentMovie[] = [];
 
   constructor() {
     makeAutoObservable(this);
-    this.loadFavorites();
+    this.loadAllFavorites();
   }
 
-  loadFavorites() {
-    const saved = localStorage.getItem('favorites');
+  private loadAllFavorites() {
+    const saved = localStorage.getItem('allFavorites');
     if (saved) {
-      this.favorites = JSON.parse(saved);
+      this.allFavorites = JSON.parse(saved);
     }
   }
 
-  saveToFavorites() {
-    localStorage.setItem('favorites', JSON.stringify(this.favorites));
+  private saveAllFavorites() {
+    localStorage.setItem('allFavorites', JSON.stringify(this.allFavorites));
+  }
+
+  initializeUserFavorites(userId: string) {
+    if (!this.allFavorites[userId]) {
+      this.allFavorites[userId] = [];
+      this.saveAllFavorites();
+    }
+  }
+
+  loadUserFavorites(userId: number) {
+    this.currentUserFavorites = this.allFavorites[userId] || [];
+  }
+
+  saveCurrentUserFavorites() {
+    if (UserStore.currentUser) {
+      this.allFavorites[UserStore.currentUser.id] = this.currentUserFavorites;
+      this.saveAllFavorites();
+    }
+  }
+
+  get favorites() {
+    return this.currentUserFavorites;
   }
 
   checkIsMovieInFavorites(id: number) {
-    return this.favorites.some((movie) => movie.id === id);
+    return this.currentUserFavorites.some((movie) => movie.id === id);
   }
 
   addFavoriteMovie(movie: ICurrentMovie | null) {
+    if (!UserStore.currentUser) return;
+
     if (movie && !this.checkIsMovieInFavorites(movie.id)) {
-      this.favorites.push(movie);
-      this.saveToFavorites();
-      console.log(toJS(movie));
+      this.currentUserFavorites.push(movie);
+      this.saveCurrentUserFavorites();
     }
   }
 
   deleteFromFavorites(movieToDelete: ICurrentMovie) {
-    this.favorites = this.favorites.filter(
+    this.currentUserFavorites = this.currentUserFavorites.filter(
       (movie) => movie.id !== movieToDelete.id
     );
-    this.saveToFavorites();
-
-    return this.favorites;
+    this.saveCurrentUserFavorites();
+    return this.currentUserFavorites;
   }
 
   deleteAllFavorites() {
-    localStorage.removeItem('favorites');
+    if (!UserStore.currentUser) return;
 
-    this.favorites = [];
+    this.currentUserFavorites = [];
+    this.allFavorites[UserStore.currentUser.id] = [];
+    this.saveAllFavorites();
   }
 }
 

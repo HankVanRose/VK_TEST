@@ -20,7 +20,7 @@ function App() {
           <Route path="/register" element={<Registration />} />
           <Route path="/login" element={<Login />} />
           <Route path="/*" element={<Page404 />} />
-          <Route path="/favorites" element={<FavoritesPage />} />
+          <Route path="/favorites/:userId" element={<FavoritesPage />} />
         </Route>
       </Routes>
     </>

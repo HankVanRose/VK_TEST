@@ -13,11 +13,18 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 import MoviesStore from '../../store/MoviesStore';
+import { useNavigate } from 'react-router';
+import UserStore from '../../store/UserStore';
 
 const ModalWindow = observer(() => {
   const [open, setOpen] = useState(false);
   const movie = MoviesStore.currentMovie;
+  const user = UserStore.currentUser;
+  const navigate = useNavigate();
   const handleClickOpen = () => {
+    if (!user) {
+      navigate('/');
+    }
     setOpen(true);
   };
 

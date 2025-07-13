@@ -3,13 +3,18 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 
 import { observer } from 'mobx-react-lite';
 
 import UserStore from '../../store/UserStore';
 
 const Header = observer(() => {
+  const navigate = useNavigate();
+  const logoutHandler = () => {
+    UserStore.logout();
+    navigate('/');
+  };
   return (
     <Box>
       <AppBar position="static">
@@ -27,7 +32,7 @@ const Header = observer(() => {
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
               <Typography
                 component={Link}
-                to={'/favorites'}
+                to={`/favorites/${UserStore.currentUser.id}`}
                 sx={{ flexGrow: 1, textDecoration: 'none', color: 'inherit' }}
               >
                 ИЗБРАННОЕ
@@ -36,7 +41,7 @@ const Header = observer(() => {
               <Typography>
                 Привет: {UserStore.currentUser.username.toUpperCase()}
               </Typography>
-              <Button color="inherit" onClick={() => UserStore.logout()}>
+              <Button color="inherit" onClick={logoutHandler}>
                 Выйти
               </Button>
             </Box>

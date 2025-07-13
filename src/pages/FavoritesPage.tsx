@@ -5,15 +5,17 @@ import { Grid, Box, Typography, Button, Container, Paper } from '@mui/material';
 import MovieCard from '../components/MovieCard/MovieCard';
 import FavoriteMovieStore from '../store/FavoriteMovieStore';
 import { useNavigate } from 'react-router';
+import UserStore from '../store/UserStore';
 
 const FavoritesPage: React.FC = observer(() => {
   useEffect(() => {
     const loadFavorites = () => {
-      FavoriteMovieStore.loadFavorites();
+      FavoriteMovieStore.loadUserFavorites(Number(userId));
     };
     loadFavorites();
   }, []);
   const favorites = FavoriteMovieStore.favorites;
+  const userId = UserStore.currentUser?.id;
   const navigate = useNavigate();
   return (
     <Container sx={{ py: 4 }}>

@@ -11,7 +11,7 @@ interface Poster {
   url: string;
 }
 
-interface Genre {
+export interface Genre {
   name: string;
 }
 

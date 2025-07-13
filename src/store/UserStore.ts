@@ -1,5 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
+import FavoriteMovieStore from './FavoriteMovieStore';
+
 interface User {
   id: string;
   username: string;
@@ -9,6 +11,7 @@ interface User {
 
 class UserStore {
   currentUser: User | null = null;
+
   users: User[] = [];
 
   constructor() {
@@ -34,7 +37,7 @@ class UserStore {
 
     this.users.push(newUser);
     this.currentUser = newUser;
-
+    FavoriteMovieStore.initializeUserFavorites(newUser.id);
     this.saveToLocalStorage();
   }
 
@@ -45,6 +48,7 @@ class UserStore {
     if (user) {
       this.currentUser = user;
       this.saveToLocalStorage();
+      FavoriteMovieStore.loadUserFavorites(Number(user.id));
       return true;
     }
     return false;

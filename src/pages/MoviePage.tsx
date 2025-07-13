@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { useParams } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { observer } from 'mobx-react-lite';
 import {
   Container,
@@ -26,6 +26,7 @@ import { ActorsList } from '../components/CurrentMovieCard/ActorsList';
 import { MovieHeader } from '../components/CurrentMovieCard/MovieHeader/MovieHeader';
 import { MovieTitle } from '../components/CurrentMovieCard/MovieTitle/MovieTitle';
 import { MovieMetadata } from '../components/CurrentMovieCard/MovieData';
+import UserStore from '../store/UserStore';
 
 export const MoviePage = observer(() => {
   const { id } = useParams<{ id: string }>();
@@ -56,6 +57,7 @@ export const MoviePage = observer(() => {
 
   const movie = MoviesStore.currentMovie;
   const actors = MoviesStore.actors;
+  
 
   const ratingKp = useMemo(
     () => movie?.rating?.kp?.toFixed(1),
@@ -73,6 +75,7 @@ export const MoviePage = observer(() => {
   if (isLoading) return <Loading />;
   if (error) return <Typography color="error">{error}</Typography>;
   if (!movie) return <Page404 />;
+  console.log(movie );
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>

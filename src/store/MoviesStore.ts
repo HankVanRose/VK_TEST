@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import type { Movies, MoviesApiResponse } from '../api/types/movies';
+import type { Genre, Movies, MoviesApiResponse } from '../api/types/movies';
 import axios, { type AxiosResponse } from 'axios';
 import { toJS } from 'mobx';
 import type { ICurrentMovie, Person } from '../api/types/currentMovie';
@@ -11,9 +11,49 @@ class MoviesStore {
   moreToLoad = true;
   currentMovie: ICurrentMovie | null = null;
   actors: Person[] = [];
+  genres: Genre[] = [];
+  filteredMovies: Movies = [];
+
+  filters = {
+    selectedGenres: [] as string[],
+    ratingRange: [0, 10] as [number, number],
+    yearRange: [1990, new Date().getFullYear()] as [number, number],
+    isActive: false,
+  };
 
   constructor() {
     makeAutoObservable(this);
+  }
+
+  async loadGenres() {
+    try {
+      this.isLoading = true;
+      // const response = await axios.get(
+      //   'https://api.kinopoisk.dev/v1/movie/possible-values-by-field?field=genres.name',
+      //   {
+      //     headers: {
+      //       accept: 'application/json',
+      //       'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T',
+      //     },
+      //   }
+      // );
+      const response = await axios.get<Genre[]>('../.././genres.json', {
+        // headers: {
+        //   accept: 'application/json',
+        //   'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T',
+        // },
+      });
+      const allGenres = response.data;
+      //  const allGenres = await response.data.map((el) => el.name);
+
+      runInAction(() => {
+        this.genres = allGenres;
+      });
+    } finally {
+      runInAction(() => {
+        this.isLoading = false;
+      });
+    }
   }
 
   async loadMovies(params = {}) {
@@ -42,11 +82,14 @@ class MoviesStore {
       const start = (this.page - 1) * 5;
       const end = start + 5;
       const docs = allMovies.slice(start, end);
+
       // const { docs, page, pages } = response.data;
 
       runInAction(() => {
         this.movies = [...this.movies, ...docs];
+        this.applyFilters();
         this.page += 1;
+        console.log('Loaded movies:', this.movies.length);
         this.moreToLoad = start < allMovies.length;
         // this.moreToLoad = page < pages;
       });
@@ -58,29 +101,81 @@ class MoviesStore {
     }
   }
 
+  applyFilters() {
+    this.filteredMovies = this.movies.filter((movie) => {
+      const year = movie.year ?? 0;
+      const rating = movie.rating?.imdb ?? 0;
+      const genreMatch =
+        this.filters.selectedGenres.length === 0 ||
+        movie.genres?.some((g) => this.filters.selectedGenres.includes(g.name));
+      const ratingMatch =
+        rating >= this.filters.ratingRange[0] &&
+        rating <= this.filters.ratingRange[1];
+      const yearMatch =
+        year >= this.filters.yearRange[0] && year <= this.filters.yearRange[1];
+
+      return genreMatch && ratingMatch && yearMatch;
+    });
+  }
+
   async loadMovieDetails(id: number) {
     try {
       runInAction(() => {
         this.currentMovie = null;
       });
       const response = await axios.get<ICurrentMovie>(
-        `https://api.kinopoisk.dev/v1.4/movie/${id}`,
-        // `../.././film.json`,
-        {
-          headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
-        }
+        // `https://api.kinopoisk.dev/v1.4/movie/${id}`,
+        `../.././film.json`
+        // {
+        //   headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
+        // }
       );
-      // const foundMovie = response.data.docs.find((el) => el.id === id);
+      const foundMovie = response.data.docs.find((el) => el.id === id);
 
       runInAction(() => {
-        this.currentMovie = response.data;
-        this.actors = response.data.persons.filter(
+        this.currentMovie = foundMovie || null;
+
+        this.actors = foundMovie?.persons.filter(
           (el) => el.enProfession === 'actor'
         );
       });
     } catch (error) {
       console.error('Не удалось загрузить данные о фильме:', error);
     }
+  }
+
+  toggleGenre(genreName: string) {
+    if (this.filters.selectedGenres.includes(genreName)) {
+      this.filters.selectedGenres = this.filters.selectedGenres.filter(
+        (g) => g !== genreName
+      );
+    } else {
+      this.filters.selectedGenres.push(genreName);
+    }
+    this.filters.isActive = true;
+    this.applyFilters();
+  }
+
+  setRatingRange(range: [number, number]) {
+    this.filters.ratingRange = range;
+    this.filters.isActive = true;
+    this.applyFilters();
+  }
+
+  setYearRange(range: [number, number]) {
+    this.filters.yearRange = range;
+    this.filters.isActive = true;
+    this.applyFilters();
+  }
+
+  resetFilters() {
+    this.filters = {
+      selectedGenres: [],
+      ratingRange: [0, 10],
+      yearRange: [1990, new Date().getFullYear()],
+      isActive: false,
+    };
+    this.applyFilters();
   }
 
   reset() {
