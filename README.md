@@ -1,69 +1,24 @@
-# React + TypeScript + Vite
+Выполнение тестового задания.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+1. Для запуска проекта, достаточно fork, => npm i для установки зависимостей.
 
-Currently, two official plugins are available:
+2. В папке store/MoviesStore.ts/ необходимо вставить свой  headers: { 'X-API-KEY': 'ВСТАВЬТЕ СВОЙ API KEY' }, для функций loadMovieDetails(), loadMovies(), loadGenres() вставить нужно в каждую, иначе магии не будет.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+3. В качестве сборщика использовался VITE, в качестве UI KIT - MUI.
 
-## Expanding the ESLint configuration
+4. Согласно задания, стейт менеджер MOBx.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+   Помимо основных задач, также реализованы:
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   1. Регистрация пользователя с сохранение в localStorage, которая позволит оценить весь функционал.
+   2. Пользователи, которые не зарегистрированы, не смогут добавлять фильмы в избранное.
+   3. Реализована возможность добавления в избранное, для каждого отдельного пользователя. (хранится users[](все пользователи), currentUser(текущий пользователь), а также allFavorites(где хранятся избранные фильмы для каждого пользователя)
+   4. Реализована возможность удаления любимых фильмов из localStorage как по одному, так и всех сразу.
+   5. Фильтрация реализована с учетом searchParameters, можно делиться ссылкой, при открытии, фильтра остаются на месте.
+   6. Добавление фильма в избранное реализовано через кнопку и модальное окно с подтверждением действия, в случае добавления пользователю отображается SnackBar с статусом и в верхнем правом углу появляется индикатор добавлености.
+   7. В качестве фильтрации по рейтингу, выбран рейтинг IMDb.
+   8. На карточке фильма, отображаются только рейтинг IMDb и Кинопоиск, сделано для удобства.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Реализованы все требования согласно ТЗ.
+Стек: React, TypeScript, React-Router, Mobx, Axios для запросов.
+Задачи деплоя не было, поэтому запуск проекта осуществляется через npm run dev
