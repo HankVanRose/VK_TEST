@@ -34,7 +34,7 @@ class MoviesStore {
         {
           headers: {
             accept: 'application/json',
-            'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T',
+            'X-API-KEY': 'ВСТАВЬТЕ СВОЙ API KEY',
           },
         }
       );
@@ -107,7 +107,7 @@ class MoviesStore {
             page: this.page,
             ...params,
           },
-          headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
+          headers: { 'X-API-KEY': 'ВСТАВЬТЕ СВОЙ API KEY' },
         }
       );
       const allMovies = response.data.docs;
@@ -163,7 +163,7 @@ class MoviesStore {
       const response = await axios.get<ICurrentMovie>(
         `https://api.kinopoisk.dev/v1.4/movie/${id}`,
         {
-          headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
+          headers: { 'X-API-KEY': 'ВСТАВЬТЕ СВОЙ API KEY' },
         }
       );
       console.log(response.data);
