@@ -60,7 +60,7 @@ const ModalWindow = observer(() => {
   };
   const favoriteMovieStore = FavoriteMovieStore;
   const isFavorite = movie
-    ? favoriteMovieStore.checkIsMovieInFavorites(movie.id)
+    ? favoriteMovieStore.checkIsMovieInFavorites(Number(movie?.id))
     : false;
 
   return (

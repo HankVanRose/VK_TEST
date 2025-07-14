@@ -21,7 +21,7 @@ import { MovieInfoItem } from '../components/CurrentMovieCard/MovieInfoItem/Movi
 import LoremGenerator from '../components/CurrentMovieCard/Lorem/LoremGenerator';
 import Loading from './Loading';
 import Page404 from './Page404';
- 
+
 import { ActorsList } from '../components/CurrentMovieCard/ActorsList';
 import { MovieHeader } from '../components/CurrentMovieCard/MovieHeader/MovieHeader';
 import { MovieTitle } from '../components/CurrentMovieCard/MovieTitle/MovieTitle';
@@ -73,7 +73,6 @@ export const MoviePage = observer(() => {
   if (isLoading) return <Loading />;
   if (error) return <Typography color="error">{error}</Typography>;
   if (!movie) return <Page404 />;
- 
 
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
@@ -173,8 +172,6 @@ export const MoviePage = observer(() => {
             {actors.length > 0 && <ActorsList actors={actors} />}
           </Box>
         </Box>
-
-        
       </Paper>
     </Container>
   );

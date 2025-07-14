@@ -6,8 +6,8 @@ import { observer } from 'mobx-react-lite';
 import ModalWindow from '../../ModalWindow/ModalWindow';
 
 interface MovieHeaderProps {
-  movie: {
-    id: number;
+  movie?: {
+    id?: number | string;
     name?: string;
     alternativeName?: string;
     year?: number;
@@ -17,6 +17,8 @@ interface MovieHeaderProps {
 export const MovieHeader = observer(({ movie }: MovieHeaderProps) => {
   const navigate = useNavigate();
   const theme = useTheme();
+
+  
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
@@ -32,10 +34,10 @@ export const MovieHeader = observer(({ movie }: MovieHeaderProps) => {
       >
         Назад
       </Button>
- <ModalWindow />
+      <ModalWindow />
       <IconButton
         sx={{
-          color: FavoriteMovieStore.checkIsMovieInFavorites(movie.id)
+          color: FavoriteMovieStore.checkIsMovieInFavorites(Number(movie?.id))
             ? theme.palette.error.main
             : theme.palette.text.secondary,
           '&:hover': {
@@ -43,7 +45,7 @@ export const MovieHeader = observer(({ movie }: MovieHeaderProps) => {
           },
         }}
       >
-        {FavoriteMovieStore.checkIsMovieInFavorites(movie.id) ? (
+        {FavoriteMovieStore.checkIsMovieInFavorites(Number(movie?.id)) ? (
           <Favorite />
         ) : (
           <FavoriteBorder />

@@ -20,9 +20,10 @@ import MoviesStore from '../../store/MoviesStore';
 
 const Filters: React.FC = observer(() => {
   const [searchParams, setSearchParams] = useSearchParams();
-
+ window.scrollTo(0, 0);
   useEffect(() => {
     MoviesStore.loadGenres();
+     
   }, []);
 
   const updateURLParams = () => {
@@ -37,6 +38,7 @@ const Filters: React.FC = observer(() => {
       params.yearMax = yearRange[1].toString();
 
     setSearchParams(params);
+    
   };
 
   const handleRatingChange = (event: Event, newValue: number | number[]) => {
@@ -61,7 +63,7 @@ const Filters: React.FC = observer(() => {
 
   return (
     <Box mb={3} mt={3}>
-      <Accordion>
+      <Accordion defaultExpanded>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Фильтры</Typography>
         </AccordionSummary>

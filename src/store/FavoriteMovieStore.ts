@@ -51,7 +51,7 @@ class FavoriteMovieStore {
   addFavoriteMovie(movie: ICurrentMovie | null) {
     if (!UserStore.currentUser) return;
 
-    if (movie && !this.checkIsMovieInFavorites(movie.id)) {
+    if (movie && !this.checkIsMovieInFavorites(Number(movie?.id))) {
       this.currentUserFavorites.push(movie);
       this.saveCurrentUserFavorites();
     }

@@ -28,24 +28,18 @@ class MoviesStore {
 
   async loadGenres() {
     try {
-      // this.isLoading = true;
-      // const response = await axios.get(
-      //   'https://api.kinopoisk.dev/v1/movie/possible-values-by-field?field=genres.name',
-      //   {
-      //     headers: {
-      //       accept: 'application/json',
-      //       'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T',
-      //     },
-      //   }
-      // );
-      const response = await axios.get<Genre[]>('../.././genres.json', {
-        // headers: {
-        //   accept: 'application/json',
-        //   'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T',
-        // },
-      });
+      this.isLoading = true;
+      const response = await axios.get(
+        'https://api.kinopoisk.dev/v1/movie/possible-values-by-field?field=genres.name',
+        {
+          headers: {
+            accept: 'application/json',
+            'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T',
+          },
+        }
+      );
+
       const allGenres = response.data;
-      //  const allGenres = await response.data.map((el) => el.name);
 
       runInAction(() => {
         this.genres = allGenres;
@@ -97,51 +91,6 @@ class MoviesStore {
       }
     });
   }
-
-  // async loadMovies(params = {}) {
-  //   if (this.isLoading || !this.moreToLoad) return;
-
-  //   this.isLoading = true;
-
-  //   try {
-  // const response: AxiosResponse<MoviesApiResponse> = await axios.get(
-  //   'https://api.kinopoisk.dev/v1.4/movie',
-
-  //   {
-  //     params: {
-  //       limit: 50,
-  //       page: this.page,
-  //       ...params,
-  //     },
-  //     headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
-  //   }
-  // );
-
-  //     const response = await axios.get<MoviesApiResponse>('../.././data.json');
-  //     const allMovies = response.data.docs;
-
-  //     // Эмулируем пагинацию на клиенте
-  //     const start = (this.page - 1) * 5;
-  //     const end = start + 5;
-  //     const docs = allMovies.slice(start, end);
-
-  //     // const { docs, page, pages } = response.data;
-
-  //     runInAction(() => {
-  //       this.movies = [...this.movies, ...docs];
-  //       this.applyFilters();
-  //       this.page += 1;
-  //       console.log('Loaded movies:', this.movies.length);
-  //       // this.moreToLoad = start < allMovies.length;
-  //       this.moreToLoad = start < allMovies.length;
-  //     });
-  //   } finally {
-  //     runInAction(() => {
-  //       this.isLoading = false;
-  //       console.log(`InStore`, toJS(this.movies.length));
-  //     });
-  //   }
-  // }
 
   async loadMovies(params = {}) {
     if (this.isLoading || !this.moreToLoad) return;
@@ -205,50 +154,25 @@ class MoviesStore {
     });
   }
 
-  // async loadMovieDetails(id: number) {
-  //   try {
-  //     runInAction(() => {
-  //       this.currentMovie = null;
-  //     });
-  //     const response = await axios.get<ICurrentMovie>(
-  //       // `https://api.kinopoisk.dev/v1.4/movie/${id}`,
-  //       `../.././film.json`
-  //       // {
-  //       //   headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
-  //       // }
-  //     );
-  //     const foundMovie = response.data.docs.find((el) => el.id === id);
-
-  //     runInAction(() => {
-  //       this.currentMovie = foundMovie || null;
-
-  //       this.actors = foundMovie?.persons.filter(
-  //         (el) => el.enProfession === 'actor'
-  //       );
-  //     });
-  //   } catch (error) {
-  //     console.error('Не удалось загрузить данные о фильме:', error);
-  //   }
-  // }
-
   async loadMovieDetails(id: number) {
     try {
       runInAction(() => {
         this.currentMovie = null;
       });
 
-      const response = await axios.get<{ docs: ICurrentMovie[] }>(
+      const response = await axios.get<ICurrentMovie>(
         `https://api.kinopoisk.dev/v1.4/movie/${id}`,
         {
           headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
         }
       );
-
+      console.log(response.data);
       runInAction(() => {
         this.currentMovie = response.data;
         this.actors =
-          response.data?.persons.filter((el) => el.enProfession === 'actor') ||
-          [];
+          this.currentMovie?.persons?.filter(
+            (el) => el.enProfession === 'actor'
+          ) || [];
       });
     } catch (error) {
       console.error('Error loading movie details:', error);
