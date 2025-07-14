@@ -9,7 +9,7 @@ import { observer } from 'mobx-react-lite';
 
 import UserStore from '../../store/UserStore';
 
-const Header = observer(() => {
+const NavBar = observer(() => {
   const navigate = useNavigate();
   const logoutHandler = () => {
     UserStore.logout();
@@ -60,4 +60,4 @@ const Header = observer(() => {
     </Box>
   );
 });
-export default Header;
+export default NavBar;

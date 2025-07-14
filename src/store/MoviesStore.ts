@@ -1,8 +1,8 @@
 import { makeAutoObservable, runInAction } from 'mobx';
-import type { Genre, Movies, MoviesApiResponse } from '../api/types/movies';
+import type { Genre, Movies, MoviesApiResponse } from '../types/movies';
 import axios, { type AxiosResponse } from 'axios';
-import { toJS } from 'mobx';
-import type { ICurrentMovie, Person } from '../api/types/currentMovie';
+
+import type { ICurrentMovie, Person, Poster } from '../types/currentMovie';
 
 class MoviesStore {
   movies: Movies = [];
@@ -13,6 +13,7 @@ class MoviesStore {
   actors: Person[] = [];
   genres: Genre[] = [];
   filteredMovies: Movies = [];
+  posters: Poster[] = [];
 
   filters = {
     selectedGenres: [] as string[],
@@ -56,7 +57,6 @@ class MoviesStore {
     }
   }
 
- 
   setFiltersFromParams(params: URLSearchParams) {
     const filters = {
       selectedGenres: params.get('genres')?.split(',') || [],
@@ -82,7 +82,6 @@ class MoviesStore {
     });
   }
 
-  
   async loadInitialMovies(params?: URLSearchParams) {
     if (params) {
       this.setFiltersFromParams(params);
@@ -105,18 +104,18 @@ class MoviesStore {
   //   this.isLoading = true;
 
   //   try {
-  //     // const response: AxiosResponse<MoviesApiResponse> = await axios.get(
-  //     //   'https://api.kinopoisk.dev/v1.4/movie',
+  // const response: AxiosResponse<MoviesApiResponse> = await axios.get(
+  //   'https://api.kinopoisk.dev/v1.4/movie',
 
-  //     //   {
-  //     //     params: {
-  //     //       limit: 50,
-  //     //       page: this.page,
-  //     //       ...params,
-  //     //     },
-  //     //     headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
-  //     //   }
-  //     // );
+  //   {
+  //     params: {
+  //       limit: 50,
+  //       page: this.page,
+  //       ...params,
+  //     },
+  //     headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
+  //   }
+  // );
 
   //     const response = await axios.get<MoviesApiResponse>('../.././data.json');
   //     const allMovies = response.data.docs;
@@ -144,24 +143,37 @@ class MoviesStore {
   //   }
   // }
 
-  // Основная загрузка фильмов
   async loadMovies(params = {}) {
     if (this.isLoading || !this.moreToLoad) return;
 
     this.isLoading = true;
 
     try {
-      const response = await axios.get<MoviesApiResponse>('../.././data.json');
+      const response: AxiosResponse<MoviesApiResponse> = await axios.get(
+        'https://api.kinopoisk.dev/v1.4/movie',
+
+        {
+          params: {
+            limit: 50,
+            page: this.page,
+            ...params,
+          },
+          headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
+        }
+      );
       const allMovies = response.data.docs;
 
-      const start = (this.page - 1) * 5;
-      const end = start + 5;
-      const docs = allMovies.slice(start, end);
+      const { docs, page, pages } = response.data;
+
+      const filmsWithPosters = allMovies.filter((movie) => movie.poster);
+
+      const posters = filmsWithPosters.map((el) => el.poster);
 
       runInAction(() => {
         this.movies = [...this.movies, ...docs];
         this.page += 1;
-        this.moreToLoad = start < allMovies.length;
+        this.moreToLoad = page < pages;
+        this.posters = posters.filter((poster) => poster !== undefined);
 
         if (this.filters.isActive) {
           this.applyFilters();
@@ -226,14 +238,17 @@ class MoviesStore {
       });
 
       const response = await axios.get<{ docs: ICurrentMovie[] }>(
-        '../.././film.json'
+        `https://api.kinopoisk.dev/v1.4/movie/${id}`,
+        {
+          headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
+        }
       );
-      const foundMovie = response.data.docs.find((el) => el.id === id);
 
       runInAction(() => {
-        this.currentMovie = foundMovie || null;
+        this.currentMovie = response.data;
         this.actors =
-          foundMovie?.persons.filter((el) => el.enProfession === 'actor') || [];
+          response.data?.persons.filter((el) => el.enProfession === 'actor') ||
+          [];
       });
     } catch (error) {
       console.error('Error loading movie details:', error);
@@ -264,7 +279,6 @@ class MoviesStore {
     this.applyFilters();
   }
 
-   
   resetFilters() {
     this.filters = {
       selectedGenres: [],
@@ -275,7 +289,6 @@ class MoviesStore {
     this.filteredMovies = [...this.movies];
   }
 
-  
   reset() {
     this.movies = [];
     this.filteredMovies = [];

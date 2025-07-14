@@ -22,7 +22,7 @@ export const MovieHeader = observer(({ movie }: MovieHeaderProps) => {
     <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
       <Button
         variant="outlined"
-        onClick={() => navigate('/')}
+        onClick={() => navigate(-1)}
         startIcon={<ArrowBack />}
         sx={{
           textTransform: 'none',

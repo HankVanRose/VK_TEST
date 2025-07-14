@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx';
-import type { ICurrentMovie } from '../api/types/currentMovie';
+import type { ICurrentMovie } from '../types/currentMovie';
 import UserStore from './UserStore';
 
 class FavoriteMovieStore {

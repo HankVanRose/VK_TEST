@@ -3,18 +3,17 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { TbBinocularsFilled } from 'react-icons/tb';
-import type { Movie } from '../../api/types/movies';
+import type { Movie } from '../../types/movies';
 import { Box } from '@mui/material';
 import { FaImdb } from 'react-icons/fa';
 import { SiKinopoisk } from 'react-icons/si';
 import { useNavigate } from 'react-router';
-import type { ICurrentMovie } from '../../api/types/currentMovie';
+import type { ICurrentMovie } from '../../types/currentMovie';
 interface MovieCardProps {
   movie: Movie | ICurrentMovie;
 }
 
 export default function MovieCard({ movie }: MovieCardProps) {
- 
   const navigate = useNavigate();
 
   return (

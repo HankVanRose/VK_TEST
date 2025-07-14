@@ -17,7 +17,7 @@ export interface ICurrentMovie {
   seriesLength?: string | null;
   ratingMpaa?: string | null;
   ageRating?: number | null;
-  poster: Poster;
+  poster?: Poster[];
   genres: Genre[];
   countries: Genre[];
   persons: Person[];
@@ -67,8 +67,8 @@ export interface Genre {
 }
 
 export interface Poster {
-  url: string;
-  previewUrl: string;
+  url?: string;
+  previewUrl?: string;
 }
 
 export interface Rating {
