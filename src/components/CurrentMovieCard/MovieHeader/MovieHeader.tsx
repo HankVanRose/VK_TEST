@@ -3,6 +3,7 @@ import { ArrowBack, Favorite, FavoriteBorder } from '@mui/icons-material';
 import { useNavigate } from 'react-router';
 import FavoriteMovieStore from '../../../store/FavoriteMovieStore';
 import { observer } from 'mobx-react-lite';
+import ModalWindow from '../../ModalWindow/ModalWindow';
 
 interface MovieHeaderProps {
   movie: {
@@ -31,7 +32,7 @@ export const MovieHeader = observer(({ movie }: MovieHeaderProps) => {
       >
         Назад
       </Button>
-
+ <ModalWindow />
       <IconButton
         sx={{
           color: FavoriteMovieStore.checkIsMovieInFavorites(movie.id)

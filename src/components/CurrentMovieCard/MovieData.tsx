@@ -1,4 +1,5 @@
 import { Chip, Divider, Stack, useTheme } from '@mui/material';
+ 
 
 interface MovieMetadataProps {
   ageRating?: number | null;
@@ -36,7 +37,9 @@ export const MovieMetadata = ({ ageRating, genres }: MovieMetadataProps) => {
             }}
           />
         ))}
+        
       </Stack>
+     
       <Divider sx={{ my: 3 }} />
     </>
   );

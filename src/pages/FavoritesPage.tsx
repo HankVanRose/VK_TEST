@@ -8,14 +8,15 @@ import { useNavigate } from 'react-router';
 import UserStore from '../store/UserStore';
 
 const FavoritesPage: React.FC = observer(() => {
+  const userId = UserStore.currentUser?.id;
   useEffect(() => {
     const loadFavorites = () => {
       FavoriteMovieStore.loadUserFavorites(Number(userId));
     };
     loadFavorites();
-  }, []);
+  }, [userId]);
   const favorites = FavoriteMovieStore.favorites;
-  const userId = UserStore.currentUser?.id;
+
   const navigate = useNavigate();
   return (
     <Container sx={{ py: 4 }}>
@@ -31,7 +32,7 @@ const FavoritesPage: React.FC = observer(() => {
         >
           <Button
             variant="outlined"
-            onClick={() => navigate('/')}
+            onClick={() => navigate(-1)}
             sx={{
               textTransform: 'none',
               borderRadius: '20px',

@@ -27,7 +27,7 @@ class MoviesStore {
 
   async loadGenres() {
     try {
-      this.isLoading = true;
+      // this.isLoading = true;
       // const response = await axios.get(
       //   'https://api.kinopoisk.dev/v1/movie/possible-values-by-field?field=genres.name',
       //   {
@@ -56,47 +56,122 @@ class MoviesStore {
     }
   }
 
+ 
+  setFiltersFromParams(params: URLSearchParams) {
+    const filters = {
+      selectedGenres: params.get('genres')?.split(',') || [],
+      ratingRange: [
+        Number(params.get('ratingMin')) || 0,
+        Number(params.get('ratingMax')) || 10,
+      ] as [number, number],
+      yearRange: [
+        Number(params.get('yearMin')) || 1990,
+        Number(params.get('yearMax')) || new Date().getFullYear(),
+      ] as [number, number],
+      isActive: Boolean(
+        params.get('genres') ||
+          params.get('ratingMin') ||
+          params.get('ratingMax') ||
+          params.get('yearMin') ||
+          params.get('yearMax')
+      ),
+    };
+
+    runInAction(() => {
+      this.filters = filters;
+    });
+  }
+
+  
+  async loadInitialMovies(params?: URLSearchParams) {
+    if (params) {
+      this.setFiltersFromParams(params);
+    }
+
+    await this.loadMovies();
+
+    runInAction(() => {
+      if (this.filters.isActive) {
+        this.applyFilters();
+      } else {
+        this.filteredMovies = [...this.movies];
+      }
+    });
+  }
+
+  // async loadMovies(params = {}) {
+  //   if (this.isLoading || !this.moreToLoad) return;
+
+  //   this.isLoading = true;
+
+  //   try {
+  //     // const response: AxiosResponse<MoviesApiResponse> = await axios.get(
+  //     //   'https://api.kinopoisk.dev/v1.4/movie',
+
+  //     //   {
+  //     //     params: {
+  //     //       limit: 50,
+  //     //       page: this.page,
+  //     //       ...params,
+  //     //     },
+  //     //     headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
+  //     //   }
+  //     // );
+
+  //     const response = await axios.get<MoviesApiResponse>('../.././data.json');
+  //     const allMovies = response.data.docs;
+
+  //     // Эмулируем пагинацию на клиенте
+  //     const start = (this.page - 1) * 5;
+  //     const end = start + 5;
+  //     const docs = allMovies.slice(start, end);
+
+  //     // const { docs, page, pages } = response.data;
+
+  //     runInAction(() => {
+  //       this.movies = [...this.movies, ...docs];
+  //       this.applyFilters();
+  //       this.page += 1;
+  //       console.log('Loaded movies:', this.movies.length);
+  //       // this.moreToLoad = start < allMovies.length;
+  //       this.moreToLoad = start < allMovies.length;
+  //     });
+  //   } finally {
+  //     runInAction(() => {
+  //       this.isLoading = false;
+  //       console.log(`InStore`, toJS(this.movies.length));
+  //     });
+  //   }
+  // }
+
+  // Основная загрузка фильмов
   async loadMovies(params = {}) {
     if (this.isLoading || !this.moreToLoad) return;
 
     this.isLoading = true;
 
     try {
-      // const response: AxiosResponse<MoviesApiResponse> = await axios.get(
-      //   'https://api.kinopoisk.dev/v1.4/movie',
-
-      //   {
-      //     params: {
-      //       limit: 50,
-      //       page: this.page,
-      //       ...params,
-      //     },
-      //     headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
-      //   }
-      // );
-
       const response = await axios.get<MoviesApiResponse>('../.././data.json');
       const allMovies = response.data.docs;
 
-      // Эмулируем пагинацию на клиенте
       const start = (this.page - 1) * 5;
       const end = start + 5;
       const docs = allMovies.slice(start, end);
 
-      // const { docs, page, pages } = response.data;
-
       runInAction(() => {
         this.movies = [...this.movies, ...docs];
-        this.applyFilters();
         this.page += 1;
-        console.log('Loaded movies:', this.movies.length);
         this.moreToLoad = start < allMovies.length;
-        // this.moreToLoad = page < pages;
+
+        if (this.filters.isActive) {
+          this.applyFilters();
+        } else {
+          this.filteredMovies = [...this.movies];
+        }
       });
     } finally {
       runInAction(() => {
         this.isLoading = false;
-        console.log(`InStore`, toJS(this.movies.length));
       });
     }
   }
@@ -118,29 +193,50 @@ class MoviesStore {
     });
   }
 
+  // async loadMovieDetails(id: number) {
+  //   try {
+  //     runInAction(() => {
+  //       this.currentMovie = null;
+  //     });
+  //     const response = await axios.get<ICurrentMovie>(
+  //       // `https://api.kinopoisk.dev/v1.4/movie/${id}`,
+  //       `../.././film.json`
+  //       // {
+  //       //   headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
+  //       // }
+  //     );
+  //     const foundMovie = response.data.docs.find((el) => el.id === id);
+
+  //     runInAction(() => {
+  //       this.currentMovie = foundMovie || null;
+
+  //       this.actors = foundMovie?.persons.filter(
+  //         (el) => el.enProfession === 'actor'
+  //       );
+  //     });
+  //   } catch (error) {
+  //     console.error('Не удалось загрузить данные о фильме:', error);
+  //   }
+  // }
+
   async loadMovieDetails(id: number) {
     try {
       runInAction(() => {
         this.currentMovie = null;
       });
-      const response = await axios.get<ICurrentMovie>(
-        // `https://api.kinopoisk.dev/v1.4/movie/${id}`,
-        `../.././film.json`
-        // {
-        //   headers: { 'X-API-KEY': '0Q324AJ-BK6MGPA-HC7S89E-M504R5T' },
-        // }
+
+      const response = await axios.get<{ docs: ICurrentMovie[] }>(
+        '../.././film.json'
       );
       const foundMovie = response.data.docs.find((el) => el.id === id);
 
       runInAction(() => {
         this.currentMovie = foundMovie || null;
-
-        this.actors = foundMovie?.persons.filter(
-          (el) => el.enProfession === 'actor'
-        );
+        this.actors =
+          foundMovie?.persons.filter((el) => el.enProfession === 'actor') || [];
       });
     } catch (error) {
-      console.error('Не удалось загрузить данные о фильме:', error);
+      console.error('Error loading movie details:', error);
     }
   }
 
@@ -168,6 +264,7 @@ class MoviesStore {
     this.applyFilters();
   }
 
+   
   resetFilters() {
     this.filters = {
       selectedGenres: [],
@@ -175,18 +272,15 @@ class MoviesStore {
       yearRange: [1990, new Date().getFullYear()],
       isActive: false,
     };
-    this.applyFilters();
+    this.filteredMovies = [...this.movies];
   }
 
+  
   reset() {
     this.movies = [];
+    this.filteredMovies = [];
     this.page = 1;
     this.moreToLoad = true;
-  }
-  cleanup() {
-    if (this.movies.length > 100) {
-      this.movies = this.movies.slice(-100);
-    }
   }
 }
 

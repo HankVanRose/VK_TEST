@@ -2,6 +2,7 @@ import { observer } from 'mobx-react-lite';
 
 import FavoriteMovieStore from '../../store/FavoriteMovieStore';
 import {
+  Alert,
   Box,
   Button,
   Dialog,
@@ -9,23 +10,38 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Snackbar,
+  Tooltip,
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
 import MoviesStore from '../../store/MoviesStore';
-import { useNavigate } from 'react-router';
+ 
 import UserStore from '../../store/UserStore';
 
 const ModalWindow = observer(() => {
   const [open, setOpen] = useState(false);
+  const [openSnack, setOpenSnack] = useState(false);
+  const [openSuccessSnack, setOpenSuccessSnack] = useState(false);
+  const [snackMessage, setSnackMessage] = useState('');
   const movie = MoviesStore.currentMovie;
   const user = UserStore.currentUser;
-  const navigate = useNavigate();
+
   const handleClickOpen = () => {
-    if (!user) {
-      navigate('/');
-    }
     setOpen(true);
+  };
+
+  const handleClickOpenSnack = () => {
+    setSnackMessage('Необходимо зарегистрироваться');
+    setOpenSnack(true);
+  };
+
+  const handleCloseSnack = () => {
+    setOpenSnack(false);
+  };
+
+  const handleCloseSuccessSnack = () => {
+    setOpenSuccessSnack(false);
   };
 
   const handleClose = () => {
@@ -35,6 +51,10 @@ const ModalWindow = observer(() => {
   const handleSubmit = () => {
     if (movie) {
       favoriteMovieStore.addFavoriteMovie(movie);
+      setSnackMessage(
+        `Фильм "${movie.name || movie.alternativeName}" добавлен в избранное!`
+      );
+      setOpenSuccessSnack(true);
     }
     setOpen(false);
   };
@@ -45,15 +65,55 @@ const ModalWindow = observer(() => {
 
   return (
     <>
-      <Button
-        variant="outlined"
-        onClick={handleClickOpen}
-        disabled={isFavorite}
+      {user ? (
+        <Button
+          variant="outlined"
+          onClick={handleClickOpen}
+          disabled={isFavorite}
+        >
+          <Typography>
+            {isFavorite ? 'Уже в избранном' : 'Добавить в избранное'}
+          </Typography>
+        </Button>
+      ) : (
+        <>
+          <Tooltip title="Необходимо зарегистрироваться" arrow>
+            <Button variant="outlined" onClick={handleClickOpenSnack}>
+              <Typography>ДОБАВИТЬ В ИЗБРАННОЕ</Typography>
+            </Button>
+          </Tooltip>
+          <Snackbar
+            open={openSnack}
+            autoHideDuration={6000}
+            onClose={handleCloseSnack}
+          >
+            <Alert
+              onClose={handleCloseSnack}
+              severity="error"
+              variant="filled"
+              sx={{ width: '100%' }}
+            >
+              {snackMessage}
+            </Alert>
+          </Snackbar>
+        </>
+      )}
+
+      <Snackbar
+        open={openSuccessSnack}
+        autoHideDuration={6000}
+        onClose={handleCloseSuccessSnack}
       >
-        <Typography>
-          {isFavorite ? 'Уже в избранном' : 'Добавить в избранное'}
-        </Typography>
-      </Button>
+        <Alert
+          onClose={handleCloseSuccessSnack}
+          severity="success"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {snackMessage}
+        </Alert>
+      </Snackbar>
+
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Добавить в избранное</DialogTitle>
         <DialogContent>
